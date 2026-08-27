@@ -9,18 +9,47 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TestxxxRouteImport } from './routes/testxxx'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as JournalRouteImport } from './routes/journal'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CommissionRouteImport } from './routes/commission'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as JournalIndexRouteImport } from './routes/journal.index'
 import { Route as GalleryIndexRouteImport } from './routes/gallery.index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as OrderTokenRouteImport } from './routes/order/$token'
+import { Route as JournalJournalIdRouteImport } from './routes/journal.$journalId'
 import { Route as GalleryArtworkIdRouteImport } from './routes/gallery.$artworkId'
+import { Route as CommissionPaymentPaymentIdRouteImport } from './routes/commission-payment/$paymentId'
+import { Route as AdminFeedbackRouteImport } from './routes/admin/feedback'
+import { Route as AdminContactMessagesRouteImport } from './routes/admin/contact-messages'
+import { Route as AdminJournalRouteRouteImport } from './routes/admin/journal/route'
+import { Route as AdminArtworksRouteRouteImport } from './routes/admin/artworks/route'
+import { Route as AdminJournalIndexRouteImport } from './routes/admin/journal/index'
+import { Route as AdminArtworksIndexRouteImport } from './routes/admin/artworks/index'
+import { Route as AdminJournalNewRouteImport } from './routes/admin/journal/new'
+import { Route as AdminJournalJournalIdRouteImport } from './routes/admin/journal/$journalId'
+import { Route as AdminInquiriesInquiryIdRouteImport } from './routes/admin/inquiries/$inquiryId'
+import { Route as AdminArtworksNewRouteImport } from './routes/admin/artworks/new'
+import { Route as AdminArtworksArtworkIdRouteImport } from './routes/admin/artworks/$artworkId'
 
+const TestxxxRoute = TestxxxRouteImport.update({
+  id: '/testxxx',
+  path: '/testxxx',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalRoute = JournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -38,6 +67,11 @@ const CommissionRoute = CommissionRouteImport.update({
   path: '/commission',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -48,26 +82,126 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JournalIndexRoute = JournalIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => JournalRoute,
+} as any)
 const GalleryIndexRoute = GalleryIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => GalleryRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const OrderTokenRoute = OrderTokenRouteImport.update({
+  id: '/order/$token',
+  path: '/order/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalJournalIdRoute = JournalJournalIdRouteImport.update({
+  id: '/$journalId',
+  path: '/$journalId',
+  getParentRoute: () => JournalRoute,
 } as any)
 const GalleryArtworkIdRoute = GalleryArtworkIdRouteImport.update({
   id: '/$artworkId',
   path: '/$artworkId',
   getParentRoute: () => GalleryRoute,
 } as any)
+const CommissionPaymentPaymentIdRoute =
+  CommissionPaymentPaymentIdRouteImport.update({
+    id: '/commission-payment/$paymentId',
+    path: '/commission-payment/$paymentId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AdminFeedbackRoute = AdminFeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminContactMessagesRoute = AdminContactMessagesRouteImport.update({
+  id: '/contact-messages',
+  path: '/contact-messages',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminJournalRouteRoute = AdminJournalRouteRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminArtworksRouteRoute = AdminArtworksRouteRouteImport.update({
+  id: '/artworks',
+  path: '/artworks',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminJournalIndexRoute = AdminJournalIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminJournalRouteRoute,
+} as any)
+const AdminArtworksIndexRoute = AdminArtworksIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminArtworksRouteRoute,
+} as any)
+const AdminJournalNewRoute = AdminJournalNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminJournalRouteRoute,
+} as any)
+const AdminJournalJournalIdRoute = AdminJournalJournalIdRouteImport.update({
+  id: '/$journalId',
+  path: '/$journalId',
+  getParentRoute: () => AdminJournalRouteRoute,
+} as any)
+const AdminInquiriesInquiryIdRoute = AdminInquiriesInquiryIdRouteImport.update({
+  id: '/inquiries/$inquiryId',
+  path: '/inquiries/$inquiryId',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminArtworksNewRoute = AdminArtworksNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminArtworksRouteRoute,
+} as any)
+const AdminArtworksArtworkIdRoute = AdminArtworksArtworkIdRouteImport.update({
+  id: '/$artworkId',
+  path: '/$artworkId',
+  getParentRoute: () => AdminArtworksRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/commission': typeof CommissionRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRouteWithChildren
+  '/journal': typeof JournalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/testxxx': typeof TestxxxRoute
+  '/admin/artworks': typeof AdminArtworksRouteRouteWithChildren
+  '/admin/journal': typeof AdminJournalRouteRouteWithChildren
+  '/admin/contact-messages': typeof AdminContactMessagesRoute
+  '/admin/feedback': typeof AdminFeedbackRoute
+  '/commission-payment/$paymentId': typeof CommissionPaymentPaymentIdRoute
   '/gallery/$artworkId': typeof GalleryArtworkIdRoute
+  '/journal/$journalId': typeof JournalJournalIdRoute
+  '/order/$token': typeof OrderTokenRoute
+  '/admin/': typeof AdminIndexRoute
   '/gallery/': typeof GalleryIndexRoute
+  '/journal/': typeof JournalIndexRoute
+  '/admin/artworks/$artworkId': typeof AdminArtworksArtworkIdRoute
+  '/admin/artworks/new': typeof AdminArtworksNewRoute
+  '/admin/inquiries/$inquiryId': typeof AdminInquiriesInquiryIdRoute
+  '/admin/journal/$journalId': typeof AdminJournalJournalIdRoute
+  '/admin/journal/new': typeof AdminJournalNewRoute
+  '/admin/artworks/': typeof AdminArtworksIndexRoute
+  '/admin/journal/': typeof AdminJournalIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -75,31 +209,84 @@ export interface FileRoutesByTo {
   '/commission': typeof CommissionRoute
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/testxxx': typeof TestxxxRoute
+  '/admin/contact-messages': typeof AdminContactMessagesRoute
+  '/admin/feedback': typeof AdminFeedbackRoute
+  '/commission-payment/$paymentId': typeof CommissionPaymentPaymentIdRoute
   '/gallery/$artworkId': typeof GalleryArtworkIdRoute
+  '/journal/$journalId': typeof JournalJournalIdRoute
+  '/order/$token': typeof OrderTokenRoute
+  '/admin': typeof AdminIndexRoute
   '/gallery': typeof GalleryIndexRoute
+  '/journal': typeof JournalIndexRoute
+  '/admin/artworks/$artworkId': typeof AdminArtworksArtworkIdRoute
+  '/admin/artworks/new': typeof AdminArtworksNewRoute
+  '/admin/inquiries/$inquiryId': typeof AdminInquiriesInquiryIdRoute
+  '/admin/journal/$journalId': typeof AdminJournalJournalIdRoute
+  '/admin/journal/new': typeof AdminJournalNewRoute
+  '/admin/artworks': typeof AdminArtworksIndexRoute
+  '/admin/journal': typeof AdminJournalIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/commission': typeof CommissionRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRouteWithChildren
+  '/journal': typeof JournalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/testxxx': typeof TestxxxRoute
+  '/admin/artworks': typeof AdminArtworksRouteRouteWithChildren
+  '/admin/journal': typeof AdminJournalRouteRouteWithChildren
+  '/admin/contact-messages': typeof AdminContactMessagesRoute
+  '/admin/feedback': typeof AdminFeedbackRoute
+  '/commission-payment/$paymentId': typeof CommissionPaymentPaymentIdRoute
   '/gallery/$artworkId': typeof GalleryArtworkIdRoute
+  '/journal/$journalId': typeof JournalJournalIdRoute
+  '/order/$token': typeof OrderTokenRoute
+  '/admin/': typeof AdminIndexRoute
   '/gallery/': typeof GalleryIndexRoute
+  '/journal/': typeof JournalIndexRoute
+  '/admin/artworks/$artworkId': typeof AdminArtworksArtworkIdRoute
+  '/admin/artworks/new': typeof AdminArtworksNewRoute
+  '/admin/inquiries/$inquiryId': typeof AdminInquiriesInquiryIdRoute
+  '/admin/journal/$journalId': typeof AdminJournalJournalIdRoute
+  '/admin/journal/new': typeof AdminJournalNewRoute
+  '/admin/artworks/': typeof AdminArtworksIndexRoute
+  '/admin/journal/': typeof AdminJournalIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/commission'
     | '/contact'
     | '/gallery'
+    | '/journal'
     | '/sitemap.xml'
+    | '/testxxx'
+    | '/admin/artworks'
+    | '/admin/journal'
+    | '/admin/contact-messages'
+    | '/admin/feedback'
+    | '/commission-payment/$paymentId'
     | '/gallery/$artworkId'
+    | '/journal/$journalId'
+    | '/order/$token'
+    | '/admin/'
     | '/gallery/'
+    | '/journal/'
+    | '/admin/artworks/$artworkId'
+    | '/admin/artworks/new'
+    | '/admin/inquiries/$inquiryId'
+    | '/admin/journal/$journalId'
+    | '/admin/journal/new'
+    | '/admin/artworks/'
+    | '/admin/journal/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -107,36 +294,89 @@ export interface FileRouteTypes {
     | '/commission'
     | '/contact'
     | '/sitemap.xml'
+    | '/testxxx'
+    | '/admin/contact-messages'
+    | '/admin/feedback'
+    | '/commission-payment/$paymentId'
     | '/gallery/$artworkId'
+    | '/journal/$journalId'
+    | '/order/$token'
+    | '/admin'
     | '/gallery'
+    | '/journal'
+    | '/admin/artworks/$artworkId'
+    | '/admin/artworks/new'
+    | '/admin/inquiries/$inquiryId'
+    | '/admin/journal/$journalId'
+    | '/admin/journal/new'
+    | '/admin/artworks'
+    | '/admin/journal'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/commission'
     | '/contact'
     | '/gallery'
+    | '/journal'
     | '/sitemap.xml'
+    | '/testxxx'
+    | '/admin/artworks'
+    | '/admin/journal'
+    | '/admin/contact-messages'
+    | '/admin/feedback'
+    | '/commission-payment/$paymentId'
     | '/gallery/$artworkId'
+    | '/journal/$journalId'
+    | '/order/$token'
+    | '/admin/'
     | '/gallery/'
+    | '/journal/'
+    | '/admin/artworks/$artworkId'
+    | '/admin/artworks/new'
+    | '/admin/inquiries/$inquiryId'
+    | '/admin/journal/$journalId'
+    | '/admin/journal/new'
+    | '/admin/artworks/'
+    | '/admin/journal/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRouteWithChildren
   CommissionRoute: typeof CommissionRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRouteWithChildren
+  JournalRoute: typeof JournalRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TestxxxRoute: typeof TestxxxRoute
+  CommissionPaymentPaymentIdRoute: typeof CommissionPaymentPaymentIdRoute
+  OrderTokenRoute: typeof OrderTokenRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/testxxx': {
+      id: '/testxxx'
+      path: '/testxxx'
+      fullPath: '/testxxx'
+      preLoaderRoute: typeof TestxxxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal': {
+      id: '/journal'
+      path: '/journal'
+      fullPath: '/journal'
+      preLoaderRoute: typeof JournalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -160,6 +400,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommissionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -174,12 +421,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journal/': {
+      id: '/journal/'
+      path: '/'
+      fullPath: '/journal/'
+      preLoaderRoute: typeof JournalIndexRouteImport
+      parentRoute: typeof JournalRoute
+    }
     '/gallery/': {
       id: '/gallery/'
       path: '/'
       fullPath: '/gallery/'
       preLoaderRoute: typeof GalleryIndexRouteImport
       parentRoute: typeof GalleryRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/order/$token': {
+      id: '/order/$token'
+      path: '/order/$token'
+      fullPath: '/order/$token'
+      preLoaderRoute: typeof OrderTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal/$journalId': {
+      id: '/journal/$journalId'
+      path: '/$journalId'
+      fullPath: '/journal/$journalId'
+      preLoaderRoute: typeof JournalJournalIdRouteImport
+      parentRoute: typeof JournalRoute
     }
     '/gallery/$artworkId': {
       id: '/gallery/$artworkId'
@@ -188,8 +463,142 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryArtworkIdRouteImport
       parentRoute: typeof GalleryRoute
     }
+    '/commission-payment/$paymentId': {
+      id: '/commission-payment/$paymentId'
+      path: '/commission-payment/$paymentId'
+      fullPath: '/commission-payment/$paymentId'
+      preLoaderRoute: typeof CommissionPaymentPaymentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/feedback': {
+      id: '/admin/feedback'
+      path: '/feedback'
+      fullPath: '/admin/feedback'
+      preLoaderRoute: typeof AdminFeedbackRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/contact-messages': {
+      id: '/admin/contact-messages'
+      path: '/contact-messages'
+      fullPath: '/admin/contact-messages'
+      preLoaderRoute: typeof AdminContactMessagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/journal': {
+      id: '/admin/journal'
+      path: '/journal'
+      fullPath: '/admin/journal'
+      preLoaderRoute: typeof AdminJournalRouteRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/artworks': {
+      id: '/admin/artworks'
+      path: '/artworks'
+      fullPath: '/admin/artworks'
+      preLoaderRoute: typeof AdminArtworksRouteRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/journal/': {
+      id: '/admin/journal/'
+      path: '/'
+      fullPath: '/admin/journal/'
+      preLoaderRoute: typeof AdminJournalIndexRouteImport
+      parentRoute: typeof AdminJournalRouteRoute
+    }
+    '/admin/artworks/': {
+      id: '/admin/artworks/'
+      path: '/'
+      fullPath: '/admin/artworks/'
+      preLoaderRoute: typeof AdminArtworksIndexRouteImport
+      parentRoute: typeof AdminArtworksRouteRoute
+    }
+    '/admin/journal/new': {
+      id: '/admin/journal/new'
+      path: '/new'
+      fullPath: '/admin/journal/new'
+      preLoaderRoute: typeof AdminJournalNewRouteImport
+      parentRoute: typeof AdminJournalRouteRoute
+    }
+    '/admin/journal/$journalId': {
+      id: '/admin/journal/$journalId'
+      path: '/$journalId'
+      fullPath: '/admin/journal/$journalId'
+      preLoaderRoute: typeof AdminJournalJournalIdRouteImport
+      parentRoute: typeof AdminJournalRouteRoute
+    }
+    '/admin/inquiries/$inquiryId': {
+      id: '/admin/inquiries/$inquiryId'
+      path: '/inquiries/$inquiryId'
+      fullPath: '/admin/inquiries/$inquiryId'
+      preLoaderRoute: typeof AdminInquiriesInquiryIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/artworks/new': {
+      id: '/admin/artworks/new'
+      path: '/new'
+      fullPath: '/admin/artworks/new'
+      preLoaderRoute: typeof AdminArtworksNewRouteImport
+      parentRoute: typeof AdminArtworksRouteRoute
+    }
+    '/admin/artworks/$artworkId': {
+      id: '/admin/artworks/$artworkId'
+      path: '/$artworkId'
+      fullPath: '/admin/artworks/$artworkId'
+      preLoaderRoute: typeof AdminArtworksArtworkIdRouteImport
+      parentRoute: typeof AdminArtworksRouteRoute
+    }
   }
 }
+
+interface AdminArtworksRouteRouteChildren {
+  AdminArtworksArtworkIdRoute: typeof AdminArtworksArtworkIdRoute
+  AdminArtworksNewRoute: typeof AdminArtworksNewRoute
+  AdminArtworksIndexRoute: typeof AdminArtworksIndexRoute
+}
+
+const AdminArtworksRouteRouteChildren: AdminArtworksRouteRouteChildren = {
+  AdminArtworksArtworkIdRoute: AdminArtworksArtworkIdRoute,
+  AdminArtworksNewRoute: AdminArtworksNewRoute,
+  AdminArtworksIndexRoute: AdminArtworksIndexRoute,
+}
+
+const AdminArtworksRouteRouteWithChildren =
+  AdminArtworksRouteRoute._addFileChildren(AdminArtworksRouteRouteChildren)
+
+interface AdminJournalRouteRouteChildren {
+  AdminJournalJournalIdRoute: typeof AdminJournalJournalIdRoute
+  AdminJournalNewRoute: typeof AdminJournalNewRoute
+  AdminJournalIndexRoute: typeof AdminJournalIndexRoute
+}
+
+const AdminJournalRouteRouteChildren: AdminJournalRouteRouteChildren = {
+  AdminJournalJournalIdRoute: AdminJournalJournalIdRoute,
+  AdminJournalNewRoute: AdminJournalNewRoute,
+  AdminJournalIndexRoute: AdminJournalIndexRoute,
+}
+
+const AdminJournalRouteRouteWithChildren =
+  AdminJournalRouteRoute._addFileChildren(AdminJournalRouteRouteChildren)
+
+interface AdminRouteChildren {
+  AdminArtworksRouteRoute: typeof AdminArtworksRouteRouteWithChildren
+  AdminJournalRouteRoute: typeof AdminJournalRouteRouteWithChildren
+  AdminContactMessagesRoute: typeof AdminContactMessagesRoute
+  AdminFeedbackRoute: typeof AdminFeedbackRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminInquiriesInquiryIdRoute: typeof AdminInquiriesInquiryIdRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminArtworksRouteRoute: AdminArtworksRouteRouteWithChildren,
+  AdminJournalRouteRoute: AdminJournalRouteRouteWithChildren,
+  AdminContactMessagesRoute: AdminContactMessagesRoute,
+  AdminFeedbackRoute: AdminFeedbackRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  AdminInquiriesInquiryIdRoute: AdminInquiriesInquiryIdRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface GalleryRouteChildren {
   GalleryArtworkIdRoute: typeof GalleryArtworkIdRoute
@@ -204,13 +613,31 @@ const GalleryRouteChildren: GalleryRouteChildren = {
 const GalleryRouteWithChildren =
   GalleryRoute._addFileChildren(GalleryRouteChildren)
 
+interface JournalRouteChildren {
+  JournalJournalIdRoute: typeof JournalJournalIdRoute
+  JournalIndexRoute: typeof JournalIndexRoute
+}
+
+const JournalRouteChildren: JournalRouteChildren = {
+  JournalJournalIdRoute: JournalJournalIdRoute,
+  JournalIndexRoute: JournalIndexRoute,
+}
+
+const JournalRouteWithChildren =
+  JournalRoute._addFileChildren(JournalRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRouteWithChildren,
   CommissionRoute: CommissionRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRouteWithChildren,
+  JournalRoute: JournalRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TestxxxRoute: TestxxxRoute,
+  CommissionPaymentPaymentIdRoute: CommissionPaymentPaymentIdRoute,
+  OrderTokenRoute: OrderTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

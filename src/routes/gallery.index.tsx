@@ -1,80 +1,61 @@
-import { useMemo, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { ArtworkCard } from "@/components/gallery/ArtworkCard";
 import { Reveal } from "@/components/common/Reveal";
-import { artworks, galleryFilters, type GalleryFilter } from "@/data/artworks";
-import { cn } from "@/lib/utils";
+import type { Artwork } from "@/types/artwork";
+import { getAllArtworks } from "@/services/artwork.service";
+import { ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/gallery/")({
-  head: () => ({
-    meta: [
-      { title: "Gallery — Maison Original Artworks" },
-      {
-        name: "description",
-        content:
-          "Browse original acrylic paintings — landscapes, portraits, abstract and sacred works. Filter by availability and collect a one-of-a-kind piece.",
-      },
-      { property: "og:title", content: "Gallery — Maison Original Artworks" },
-      {
-        property: "og:description",
-        content: "Browse and collect original one-of-a-kind acrylic paintings.",
-      },
-    ],
-  }),
-  component: GalleryPage,
-});
+export const Route = createFileRoute("/gallery/")({ component: GalleryPage });
 
 function GalleryPage() {
-  const [filter, setFilter] = useState<GalleryFilter>("All");
-
-  const filtered = useMemo(() => {
-    if (filter === "All") return artworks;
-    if (filter === "Available" || filter === "Sold")
-      return artworks.filter((a) => a.availability === filter);
-    return artworks.filter((a) => a.category === filter);
-  }, [filter]);
-
+  const [filter, setFilter] = useState("All");
+  const [artworks, setArtworks] = useState<Artwork[]>([]);
+  useEffect(() => { getAllArtworks().then(setArtworks).catch(console.error); }, []);
+  const filters = ["All", ...Array.from(new Set(artworks.flatMap((art) => art.category.split(",").map((category) => category.trim()).filter(Boolean)))).sort(), "Available", "Sold"];
+  const list = useMemo(() => filter === "All" ? artworks : filter === "Available" || filter === "Sold" ? artworks.filter((art) => art.availability === filter) : artworks.filter((art) => art.category.split(",").map((category) => category.trim()).includes(filter)), [artworks, filter]);
   return (
-    <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+    <div className="mx-auto max-w-[1400px] px-5 pb-24 pt-32 md:px-10 md:pt-20">
       <Reveal>
-        <p className="eyebrow">The collection</p>
-        <h1 className="text-hero mt-4 max-w-2xl text-foreground">Gallery</h1>
-        <p className="mt-5 max-w-xl text-lg text-muted-foreground">
-          Every work is an original. Once a piece finds its home, it's gone for good.
-        </p>
+        <span className="label">
+          Complete works
+        </span>
+        <h1 className="display mt-5 text-[13vw] leading-[0.85] md:text-[8vw]">
+          Gallery</h1>
       </Reveal>
-
-      {/* Filters */}
-      <Reveal className="mt-12 flex flex-wrap gap-2.5" delay={1}>
-        {galleryFilters.map((f) => (
-          <button
-            key={f}
-            onClick={() => setFilter(f)}
-            className={cn(
-              "rounded-full border px-5 py-2 text-sm transition-all duration-300",
-              filter === f
-                ? "border-foreground bg-foreground text-background"
-                : "border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground",
-            )}
-          >
-            {f}
-          </button>
-        ))}
+      
+      <Reveal delay={1} className="hairline mt-12 flex flex-wrap gap-6 pt-5">
+        {filters.map((item) => 
+          <button key={item} type="button" 
+            onClick={() => setFilter(item)} className={`text-xs transition-colors ${filter === item ? "text-clay" : "text-muted-foreground hover:text-foreground"}`}>{item}{item === "All" && <sup className="ml-1 font-mono text-[9px]">{artworks.length}</sup>}
+          </button>)}
       </Reveal>
-
-      {/* Grid */}
-      <motion.div layout className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((art, i) => (
-          <ArtworkCard key={art.id} artwork={art} index={i} priority={i < 3} />
-        ))}
-      </motion.div>
-
-      {filtered.length === 0 && (
+      
+      <motion.div layout className="mt-14 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">{list.map((art, index) => 
+        <ArtworkCard key={art.id} artwork={art} index={index} priority={index < 3} />)}
+      </motion.div>{list.length === 0 && 
         <p className="mt-20 text-center text-muted-foreground">
-          No works in this category right now — check back soon.
+          No works in this category right now.
+        </p>}
+      
+      <Reveal className="hairline mt-24 pt-10">
+        <p className="max-w-lg text-sm text-muted-foreground">
+          Nothing here quite yours? Every commission starts as a blank stretcher and one conversation.
         </p>
-      )}
+        
+        <Link
+          to="/commission"
+          className="group mt-4 inline-flex items-center gap-1.5 text-xs font-medium"
+        >
+          <span className="link-underline">
+            Ask me for a painting
+          </span>
+
+          <ArrowRight className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
+
+      </Reveal>
     </div>
   );
 }

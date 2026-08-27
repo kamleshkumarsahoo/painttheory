@@ -1,0 +1,343 @@
+[33mThe plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the [1mresolve.tsconfigPaths[22m option. You can remove the plugin and set [1mresolve.tsconfigPaths: true[22m in your Vite config instead.[39m
+[2m8:05:50 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mA tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <StartClient ref={function ref}>
+      <Await promise={Promise}>
+        <AwaitInner promise={Promise}>
+          <RouterProvider router={{...}}>
+            <RouterContextProvider router={{...}}>
+              <Matches>
+                <SafeFragment fallback={null}>
+                  <Transitioner>
+                  <MatchesInner>
+                    <CatchBoundary getResetKey={function getResetKey} errorComponent={function ErrorComponent} ...>
+                      <CatchBoundaryImpl getResetKey={function getResetKey} onCatch={function}>
+                        <MatchImpl matchId="__root__/">
+                          <MatchView router={{...}} matchId="__root__/" resetKey={0} matchState={{routeId:"_...", ...}}>
+                            <RootShell>
+                              <html
+                                lang="en"
++                               data-tsd-source="/src/routes/__root.tsx:135:10"
+-                               data-tsd-source="/src/routes/__root.tsx:118:5"
+                                ref={function ref}
+                              >
+                                <head
++                                 data-tsd-source="/src/routes/__root.tsx:136:7"
+-                                 data-tsd-source="/src/routes/__root.tsx:119:7"
+                                  ref={function ref}
+                                >
+                                <body
++                                 data-tsd-source="/src/routes/__root.tsx:139:7"
+-                                 data-tsd-source="/src/routes/__root.tsx:122:7"
+                                  ref={function ref}
+                                >
+                                  ...
+                                    <RootComponent>
+                                      <QueryClientProvider client={{}} data-tsd-source="/src/route..." ref={function ref}>
+                                        <div
+                                          className="flex min-h-screen flex-col"
++                                         data-tsd-source="/src/routes/__root.tsx:150:7"
+-                                         data-tsd-source="/src/routes/__root.tsx:135:7"
+                                          ref={function ref}
+                                        >
+                                          <SiteHeader>
+                                          <main
+                                            className="flex-1"
++                                           data-tsd-source="/src/routes/__root.tsx:152:9"
+-                                           data-tsd-source="/src/routes/__root.tsx:137:9"
+                                            ref={function ref}
+                                          >
+                                          ...
+                                        ...
+                                  ...
+
+[2m8:05:53 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mA tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <StartClient ref={function ref}>
+      <Await promise={Promise}>
+        <AwaitInner promise={Promise}>
+          <RouterProvider router={{...}}>
+            <RouterContextProvider router={{...}}>
+              <Matches>
+                <SafeFragment fallback={null}>
+                  <Transitioner>
+                  <MatchesInner>
+                    <CatchBoundary getResetKey={function getResetKey} errorComponent={function ErrorComponent} ...>
+                      <CatchBoundaryImpl getResetKey={function getResetKey} onCatch={function}>
+                        <MatchImpl matchId="__root__/">
+                          <MatchView router={{...}} matchId="__root__/" resetKey={0} matchState={{routeId:"_...", ...}}>
+                            <RootShell>
+                              <html
+                                lang="en"
++                               data-tsd-source="/src/routes/__root.tsx:135:10"
+-                               data-tsd-source="/src/routes/__root.tsx:118:5"
+                                ref={function ref}
+                              >
+                                <head
++                                 data-tsd-source="/src/routes/__root.tsx:136:7"
+-                                 data-tsd-source="/src/routes/__root.tsx:119:7"
+                                  ref={function ref}
+                                >
+                                <body
++                                 data-tsd-source="/src/routes/__root.tsx:139:7"
+-                                 data-tsd-source="/src/routes/__root.tsx:122:7"
+                                  ref={function ref}
+                                >
+                                  ...
+                                    <RootComponent>
+                                      <QueryClientProvider client={{}} data-tsd-source="/src/route..." ref={function ref}>
+                                        <div
+                                          className="flex min-h-screen flex-col"
++                                         data-tsd-source="/src/routes/__root.tsx:150:7"
+-                                         data-tsd-source="/src/routes/__root.tsx:135:7"
+                                          ref={function ref}
+                                        >
+                                          <SiteHeader>
+                                          <main
+                                            className="flex-1"
++                                           data-tsd-source="/src/routes/__root.tsx:152:9"
+-                                           data-tsd-source="/src/routes/__root.tsx:137:9"
+                                            ref={function ref}
+                                          >
+                                          ...
+                                        ...
+                                  ...
+
+[2m8:06:04 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mA tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <StartClient ref={function ref}>
+      <Await promise={Promise}>
+        <AwaitInner promise={Promise}>
+          <RouterProvider router={{...}}>
+            <RouterContextProvider router={{...}}>
+              <Matches>
+                <SafeFragment fallback={null}>
+                  <Transitioner>
+                  <MatchesInner>
+                    <CatchBoundary getResetKey={function getResetKey} errorComponent={function ErrorComponent} ...>
+                      <CatchBoundaryImpl getResetKey={function getResetKey} onCatch={function}>
+                        <MatchImpl matchId="__root__/">
+                          <MatchView router={{...}} matchId="__root__/" resetKey={0} matchState={{routeId:"_...", ...}}>
+                            <RootShell>
+                              <html
+                                lang="en"
++                               data-tsd-source="/src/routes/__root.tsx:135:10"
+-                               data-tsd-source="/src/routes/__root.tsx:118:5"
+                                ref={function ref}
+                              >
+                                <head
++                                 data-tsd-source="/src/routes/__root.tsx:136:7"
+-                                 data-tsd-source="/src/routes/__root.tsx:119:7"
+                                  ref={function ref}
+                                >
+                                <body
++                                 data-tsd-source="/src/routes/__root.tsx:139:7"
+-                                 data-tsd-source="/src/routes/__root.tsx:122:7"
+                                  ref={function ref}
+                                >
+                                  ...
+                                    <RootComponent>
+                                      <QueryClientProvider client={{}} data-tsd-source="/src/route..." ref={function ref}>
+                                        <div
+                                          className="flex min-h-screen flex-col"
++                                         data-tsd-source="/src/routes/__root.tsx:150:7"
+-                                         data-tsd-source="/src/routes/__root.tsx:135:7"
+                                          ref={function ref}
+                                        >
+                                          <SiteHeader>
+                                          <main
+                                            className="flex-1"
++                                           data-tsd-source="/src/routes/__root.tsx:152:9"
+-                                           data-tsd-source="/src/routes/__root.tsx:137:9"
+                                            ref={function ref}
+                                          >
+                                          ...
+                                        ...
+                                  ...
+
+[2m8:08:02 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mA tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <StartClient ref={function ref}>
+      <Await promise={Promise}>
+        <AwaitInner promise={Promise}>
+          <RouterProvider router={{...}}>
+            <RouterContextProvider router={{...}}>
+              <Matches>
+                <SafeFragment fallback={null}>
+                  <Transitioner>
+                  <MatchesInner>
+                    <CatchBoundary getResetKey={function getResetKey} errorComponent={function ErrorComponent} ...>
+                      <CatchBoundaryImpl getResetKey={function getResetKey} onCatch={function}>
+                        <MatchImpl matchId="__root__/">
+                          <MatchView router={{...}} matchId="__root__/" resetKey={0} matchState={{routeId:"_...", ...}}>
+                            <RootShell>
+                              <html
+                                lang="en"
++                               data-tsd-source="/src/routes/__root.tsx:135:10"
+-                               data-tsd-source="/src/routes/__root.tsx:118:5"
+                                ref={function ref}
+                              >
+                                <head
++                                 data-tsd-source="/src/routes/__root.tsx:136:7"
+-                                 data-tsd-source="/src/routes/__root.tsx:119:7"
+                                  ref={function ref}
+                                >
+                                <body
++                                 data-tsd-source="/src/routes/__root.tsx:139:7"
+-                                 data-tsd-source="/src/routes/__root.tsx:122:7"
+                                  ref={function ref}
+                                >
+                                  ...
+                                    <RootComponent>
+                                      <QueryClientProvider client={{}} data-tsd-source="/src/route..." ref={function ref}>
+                                        <div
+                                          className="flex min-h-screen flex-col"
++                                         data-tsd-source="/src/routes/__root.tsx:150:7"
+-                                         data-tsd-source="/src/routes/__root.tsx:135:7"
+                                          ref={function ref}
+                                        >
+                                          <SiteHeader>
+                                          <main
+                                            className="flex-1"
++                                           data-tsd-source="/src/routes/__root.tsx:152:9"
+-                                           data-tsd-source="/src/routes/__root.tsx:137:9"
+                                            ref={function ref}
+                                          >
+                                          ...
+                                        ...
+                                  ...
+
+[2m8:09:43 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mA tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <StartClient ref={function ref}>
+      <Await promise={Promise}>
+        <AwaitInner promise={Promise}>
+          <RouterProvider router={{...}}>
+            <RouterContextProvider router={{...}}>
+              <Matches>
+                <SafeFragment fallback={null}>
+                  <Transitioner>
+                  <MatchesInner>
+                    <CatchBoundary getResetKey={function getResetKey} errorComponent={function ErrorComponent} ...>
+                      <CatchBoundaryImpl getResetKey={function getResetKey} onCatch={function}>
+                        <MatchImpl matchId="__root__/">
+                          <MatchView router={{...}} matchId="__root__/" resetKey={0} matchState={{routeId:"_...", ...}}>
+                            <RootShell>
+                              <html
+                                lang="en"
++                               data-tsd-source="/src/routes/__root.tsx:135:10"
+-                               data-tsd-source="/src/routes/__root.tsx:118:5"
+                                ref={function ref}
+                              >
+                                <head
++                                 data-tsd-source="/src/routes/__root.tsx:136:7"
+-                                 data-tsd-source="/src/routes/__root.tsx:119:7"
+                                  ref={function ref}
+                                >
+                                <body
++                                 data-tsd-source="/src/routes/__root.tsx:139:7"
+-                                 data-tsd-source="/src/routes/__root.tsx:122:7"
+                                  ref={function ref}
+                                >
+                                  ...
+                                    <RootComponent>
+                                      <QueryClientProvider client={{}} data-tsd-source="/src/route..." ref={function ref}>
+                                        <div
+                                          className="flex min-h-screen flex-col"
++                                         data-tsd-source="/src/routes/__root.tsx:150:7"
+-                                         data-tsd-source="/src/routes/__root.tsx:135:7"
+                                          ref={function ref}
+                                        >
+                                          <SiteHeader>
+                                          <main
+                                            className="flex-1"
++                                           data-tsd-source="/src/routes/__root.tsx:152:9"
+-                                           data-tsd-source="/src/routes/__root.tsx:137:9"
+                                            ref={function ref}
+                                          >
+                                          ...
+                                        ...
+                                  ...
+
+Error: Error transforming route file D:/projects/artworksite/src/routes/admin/inquiries/$inquiryId.tsx: SyntaxError: Invalid left-hand side in assignment expression. (216:4)
+    at file:///D:/projects/artworksite/node_modules/@tanstack/router-generator/dist/esm/generator.js:143:13
+    at async generate (file:///D:/projects/artworksite/node_modules/@tanstack/router-plugin/dist/esm/core/router-generator-plugin.js:39:4)
+    at async PluginContext.watchChange (file:///D:/projects/artworksite/node_modules/@tanstack/router-plugin/dist/esm/core/router-generator-plugin.js:49:4)
+    at async Promise.all (index 2)
+    at async EnvironmentPluginContainer.hookParallel (file:///D:/projects/artworksite/node_modules/vite/dist/node/chunks/node.js:29604:3)
+    at async EnvironmentPluginContainer.watchChange (file:///D:/projects/artworksite/node_modules/vite/dist/node/chunks/node.js:29771:3)
+    at async Promise.all (index 0)
+    at async onFileChange (file:///D:/projects/artworksite/node_modules/vite/dist/node/chunks/node.js:25548:3)
+Error: Error transforming route file D:/projects/artworksite/src/routes/admin/inquiries/$inquiryId.tsx: SyntaxError: Unexpected token, expected ":" (217:2)
+    at file:///D:/projects/artworksite/node_modules/@tanstack/router-generator/dist/esm/generator.js:143:13
+    at async generate (file:///D:/projects/artworksite/node_modules/@tanstack/router-plugin/dist/esm/core/router-generator-plugin.js:39:4)
+    at async PluginContext.watchChange (file:///D:/projects/artworksite/node_modules/@tanstack/router-plugin/dist/esm/core/router-generator-plugin.js:49:4)
+    at async Promise.all (index 2)
+    at async EnvironmentPluginContainer.hookParallel (file:///D:/projects/artworksite/node_modules/vite/dist/node/chunks/node.js:29604:3)
+    at async EnvironmentPluginContainer.watchChange (file:///D:/projects/artworksite/node_modules/vite/dist/node/chunks/node.js:29771:3)
+    at async Promise.all (index 0)
+    at async onFileChange (file:///D:/projects/artworksite/node_modules/vite/dist/node/chunks/node.js:25548:3)
+Error: Error transforming route file D:/projects/artworksite/src/routes/admin/inquiries/$inquiryId.tsx: SyntaxError: Unexpected token, expected ":" (218:2)
+    at file:///D:/projects/artworksite/node_modules/@tanstack/router-generator/dist/esm/generator.js:143:13
+    at async generate (file:///D:/projects/artworksite/node_modules/@tanstack/router-plugin/dist/esm/core/router-generator-plugin.js:39:4)
+    at async PluginContext.watchChange (file:///D:/projects/artworksite/node_modules/@tanstack/router-plugin/dist/esm/core/router-generator-plugin.js:49:4)
+    at async Promise.all (index 2)
+    at async EnvironmentPluginContainer.hookParallel (file:///D:/projects/artworksite/node_modules/vite/dist/node/chunks/node.js:29604:3)
+    at async EnvironmentPluginContainer.watchChange (file:///D:/projects/artworksite/node_modules/vite/dist/node/chunks/node.js:29771:3)
+    at async Promise.all (index 0)
+    at async onFileChange (file:///D:/projects/artworksite/node_modules/vite/dist/node/chunks/node.js:25548:3)

@@ -1,0 +1,102 @@
+
+> dev
+> vite dev --host 127.0.0.1 --port 5173
+
+[2m8:04:53 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because vite config has changed
+
+  [32m[1mVITE[22m v8.1.3[39m  [2mready in [0m[1m8057[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+[2m8:04:55 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [optimizer] bundling dependencies...
+[2m8:05:05 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m connected.
+[2m9:03:03 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/index.tsx?tsr-split=component[22m
+[2m9:03:03 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/services/inquiry.service.ts[22m
+[2m9:03:03 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m program reload
+[2m9:04:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/order/$token.tsx[22m
+[2m9:04:22 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/order/$token.tsx[22m
+[2m10:07:45 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/index.tsx?tsr-split=component[22m
+[2m10:07:45 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/services/inquiry.service.ts[22m
+[2m10:08:00 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/index.tsx?tsr-split=component[22m
+[2m10:08:00 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/services/inquiry.service.ts[22m
+[2m10:08:27 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/components/admin/InquiryCard.tsx[22m
+[2m10:08:27 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/components/admin/InquiryCard.tsx[22m
+[2m10:08:27 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m10:08:27 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m10:09:43 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/components/admin/InquiryCard.tsx[22m
+[2m10:09:43 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/components/admin/InquiryCard.tsx[22m
+[2m10:09:43 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/index.tsx, /src/routes/admin/index.tsx?tsr-split=component[22m
+[2m10:09:43 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/index.tsx[22m
+[2m10:09:43 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m10:09:43 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m11:01:00 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m11:01:00 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m11:02:06 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m11:02:06 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m11:03:04 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m11:03:04 pm[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m12:10:35 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m12:10:35 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:11:42 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:11:42 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:12:32 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:12:32 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:13:04 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:13:04 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:14:29 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:14:29 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:15:02 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:15:02 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:16:03 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:16:03 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:17:31 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:17:31 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:20:17 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:20:17 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:20:54 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:20:54 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:21:13 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:21:13 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:21:29 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:21:29 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:21:36 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:21:36 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:23:06 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:23:06 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:23:30 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:23:30 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:27:53 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:27:53 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:29:11 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:29:11 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:29:44 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:29:44 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:31:02 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:31:02 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:31:27 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:31:27 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:35:34 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:35:34 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:35:55 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:35:55 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:38:16 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:38:16 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:38:40 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:38:40 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:38:47 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:38:47 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:40:56 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m2:40:56 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m3:06:49 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/order/$token.tsx[22m
+[2m3:06:49 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/order/$token.tsx[22m
+[2m5:04:29 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:04:29 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:07:57 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:07:57 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:08:50 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:08:50 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:32:26 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:32:26 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:33:27 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:33:27 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:39:22 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css?direct, /src/routes/admin/inquiries/$inquiryId.tsx[22m
+[2m5:39:22 am[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m [32mpage reload [39m[2msrc/routes/admin/inquiries/$inquiryId.tsx[22m

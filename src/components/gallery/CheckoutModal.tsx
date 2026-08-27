@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, Loader2, ShieldCheck, X } from "lucide-react";
-import type { Artwork } from "@/data/artworks";
-import { formatPrice } from "@/data/artworks";
+import { toast } from "sonner";
+import type { Artwork } from "@/types/artwork";
+import { formatPrice } from "@/types/artwork";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { createInquiry } from "@/services/inquiry.service";
 
 interface CheckoutModalProps {
   artwork: Artwork;
@@ -11,9 +14,9 @@ interface CheckoutModalProps {
   onClose: () => void;
 }
 
-const SHIPPING = 1500;
+const SHIPPING = 0;
 
-const paymentMethods = ["UPI", "Cards", "Net Banking", "Wallets"] as const;
+/*const paymentMethods = ["UPI", "Cards", "Net Banking", "Wallets"] as const;*/
 
 type Stage = "review" | "processing" | "success";
 
@@ -24,10 +27,11 @@ type Stage = "review" | "processing" | "success";
  */
 export function CheckoutModal({ artwork, open, onClose }: CheckoutModalProps) {
   const [stage, setStage] = useState<Stage>("review");
-  const [method, setMethod] = useState<(typeof paymentMethods)[number]>("UPI");
-  const [orderNumber] = useState(
-    () => "MSN-" + Math.random().toString(36).slice(2, 8).toUpperCase(),
-  );
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [note, setNote] = useState("");
+  const [submittedOrderNumber, setSubmittedOrderNumber] = useState("");
 
   const total = artwork.price + SHIPPING;
 
@@ -37,10 +41,49 @@ export function CheckoutModal({ artwork, open, onClose }: CheckoutModalProps) {
     setTimeout(() => setStage("review"), 300);
   }
 
-  // Razorpay placeholder — replace with real razorpay.open() once enabled.
-  function simulatePayment() {
-    setStage("processing");
-    setTimeout(() => setStage("success"), 2200);
+  async function submitInquiry() {
+    try {
+      const missing = [];
+      const trimmedEmail = email.trim();
+      const trimmedPhone = phone.trim();
+
+      if (!name.trim()) missing.push("name");
+      if (!trimmedPhone) missing.push("WhatsApp number");
+      if (!trimmedEmail) missing.push("email address");
+
+      if (missing.length > 0) {
+        toast.error(`Please add your ${missing.join(", ")}.`);
+        return;
+      }
+
+      if (!isValidEmail(trimmedEmail)) {
+        toast.error("Please enter a valid email address.");
+        return;
+      }
+
+      if (!isValidPhone(trimmedPhone)) {
+        toast.error("Please enter a valid WhatsApp number.");
+        return;
+      }
+
+      setStage("processing");
+
+      const inquiry = await createInquiry({
+        artwork_id: artwork.id,
+        artwork_price_snapshot: artwork.price,
+        customer_name: name,
+        customer_email: trimmedEmail,
+        customer_phone: trimmedPhone,
+        note,
+      });
+
+      setSubmittedOrderNumber(inquiry.order_number ?? inquiry.id.slice(0, 8));
+      setStage("success");
+    } catch (err) {
+      console.error("Inquiry Error:", err);
+      toast.error("Could not submit your request. Please try again.");
+      setStage("review");
+    }
   }
 
   return (
@@ -64,7 +107,7 @@ export function CheckoutModal({ artwork, open, onClose }: CheckoutModalProps) {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 40, opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full max-w-lg overflow-hidden rounded-t-3xl bg-card shadow-frame sm:rounded-3xl"
+            className="scrollbar-none relative max-h-[calc(100dvh-1rem)] w-full max-w-lg overflow-y-auto overscroll-contain rounded-t-3xl bg-card shadow-frame sm:max-h-[min(90dvh,760px)] sm:rounded-3xl"
           >
             <button
               onClick={handleClose}
@@ -76,7 +119,7 @@ export function CheckoutModal({ artwork, open, onClose }: CheckoutModalProps) {
 
             {stage !== "success" ? (
               <div className="p-7 sm:p-9">
-                <p className="eyebrow">Secure checkout</p>
+                <p className="eyebrow">Artwork Request</p>
                 <h2 className="mt-2 font-display text-2xl text-foreground">Complete your collection</h2>
 
                 {/* Artwork summary */}
@@ -103,7 +146,9 @@ export function CheckoutModal({ artwork, open, onClose }: CheckoutModalProps) {
                   </div>
                   <div className="flex justify-between">
                     <dt className="text-muted-foreground">Shipping & insured packaging</dt>
-                    <dd className="text-foreground">{formatPrice(SHIPPING)}</dd>
+                    <dd className="text-foreground">
+                      {SHIPPING === 0 ? "FREE" : formatPrice(SHIPPING)}
+                    </dd>
                   </div>
                   <div className="flex justify-between border-t border-border pt-3 text-base">
                     <dt className="font-medium text-foreground">Total</dt>
@@ -111,7 +156,51 @@ export function CheckoutModal({ artwork, open, onClose }: CheckoutModalProps) {
                   </div>
                 </dl>
 
-                {/* Payment methods */}
+                <div className="mt-6 space-y-4">
+                  <Field label="Your Name" required>
+                    <input
+                      type="text"
+                      placeholder="Your full name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full rounded-xl border border-border bg-background px-4 py-3"
+                    />
+                  </Field>
+
+                  <Field label="WhatsApp Number" required>
+                    <input
+                      type="tel"
+                      inputMode="tel"
+                      placeholder="WhatsApp number"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="w-full rounded-xl border border-border bg-background px-4 py-3"
+                    />
+                  </Field>
+
+                  <Field label="Email Address" required>
+                    <input
+                      type="email"
+                      inputMode="email"
+                      placeholder="you@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full rounded-xl border border-border bg-background px-4 py-3"
+                    />
+                  </Field>
+
+                  <Field label="Message">
+                    <textarea
+                      placeholder="Anything you'd like to tell me? (Optional)"
+                      value={note}
+                      onChange={(e) => setNote(e.target.value)}
+                      rows={4}
+                      className="w-full rounded-xl border border-border bg-background px-4 py-3"
+                    />
+                  </Field>
+                </div>
+
+                {/* Payment methods 
                 <div className="mt-6">
                   <p className="mb-3 text-sm text-muted-foreground">Payment method</p>
                   <div className="grid grid-cols-2 gap-2">
@@ -130,25 +219,25 @@ export function CheckoutModal({ artwork, open, onClose }: CheckoutModalProps) {
                       </button>
                     ))}
                   </div>
-                </div>
+                </div>*/}
 
                 <Button
                   size="lg"
                   className="mt-7 w-full"
-                  onClick={simulatePayment}
+                  onClick={submitInquiry}
                   disabled={stage === "processing"}
                 >
                   {stage === "processing" ? (
                     <>
-                      <Loader2 className="animate-spin" /> Contacting Razorpay…
+                      <Loader2 className="animate-spin" /> Submitting your request...
                     </>
                   ) : (
-                    <>Pay {formatPrice(total)}</>
+                    <>Request Artwork</>
                   )}
                 </Button>
 
                 <p className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-                  <ShieldCheck className="size-3.5" /> Secured via Razorpay · UPI, Cards, Net Banking & Wallets
+                  <ShieldCheck className="size-3.5" /> Your request will be personally reviewed before payment is requested.
                 </p>
               </div>
             ) : (
@@ -161,14 +250,13 @@ export function CheckoutModal({ artwork, open, onClose }: CheckoutModalProps) {
                 >
                   <Check className="size-8" />
                 </motion.div>
-                <p className="eyebrow mt-6">Payment successful</p>
-                <h2 className="mt-2 font-display text-2xl text-foreground">Thank you for collecting</h2>
+                <p className="eyebrow mt-6">Request Submitted</p>
+                <h2 className="mt-2 font-display text-2xl text-foreground">Thank you!</h2>
                 <p className="mt-2 text-muted-foreground">
-                  Order <span className="font-medium text-foreground">{orderNumber}</span>
+                  Reference <span className="font-medium text-foreground">{submittedOrderNumber}</span>
                 </p>
                 <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-                  We'll carefully prepare your artwork and send tracking details shortly. A
-                  Certificate of Authenticity travels with every original.
+                  Your request has been received successfully. I'll review it personally and get in touch with you shortly.
                 </p>
                 <Button variant="outline" className="mt-8" onClick={handleClose}>
                   Continue exploring
@@ -179,5 +267,43 @@ export function CheckoutModal({ artwork, open, onClose }: CheckoutModalProps) {
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+}
+
+function isValidPhone(value: string) {
+  const compact = value.replace(/[\s().-]/g, "");
+
+  if (!/^\+?\d+$/.test(compact)) return false;
+
+  const digits = compact.replace(/^\+/, "");
+  if (digits.length === 10) return /^[6-9]\d{9}$/.test(digits);
+  if (digits.length === 12 && digits.startsWith("91")) {
+    return /^[6-9]\d{9}$/.test(digits.slice(2));
+  }
+
+  return digits.length >= 8 && digits.length <= 15;
+}
+
+function Field({
+  label,
+  required,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <Label className="mb-2 block text-sm text-foreground">
+        {label}
+        {required && <span className="text-accent"> *</span>}
+      </Label>
+      {children}
+    </div>
   );
 }

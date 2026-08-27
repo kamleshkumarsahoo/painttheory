@@ -1,55 +1,51 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Mail } from "lucide-react";
 
 export function SiteFooter() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-border/60 bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
-        <div className="flex flex-col gap-12 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-md">
-            <Link to="/" className="font-display text-3xl text-foreground">
-              Maison<span className="text-accent">.</span>
-            </Link>
-            <p className="mt-4 text-muted-foreground">
-              Original acrylic paintings inspired by places, memories and emotions —
-              each one a story worth hanging.
-            </p>
-          </div>
+    <footer className="hairline mx-auto w-full max-w-[1400px] px-5 pb-10 pt-16 md:px-10">
+      <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="label">Painttheory | studio of Kamlesh Sahoo</p>
 
-          <div className="flex flex-col gap-4">
-            <a
-              href="mailto:hello@maison-studio.art"
-              className="group inline-flex items-center gap-3 text-foreground transition-colors hover:text-accent"
-            >
-              <Mail className="size-4" />
-              <span className="link-underline">hello@maison-studio.art</span>
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 text-foreground transition-colors hover:text-accent"
-            >
-              <Instagram className="size-4" />
-              <span className="link-underline">@maison.studio</span>
-            </a>
-          </div>
+          <p className="wordmark wordmark-hover mt-3 text-[13vw] md:text-[7vw]">
+            Painttheory
+          </p>
         </div>
 
-        <div className="mt-14 flex flex-col-reverse gap-4 border-t border-border/60 pt-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <p>© {year} Maison Studio. All artworks are original and one-of-a-kind.</p>
-          <div className="flex gap-6">
-            <Link to="/contact" className="link-underline hover:text-foreground">
-              Privacy Policy
+        <div className="flex gap-10 text-xs text-muted-foreground">
+          <div className="flex flex-col gap-2">
+            <span className="label">Site</span>
+
+            <Link to="/gallery" className="link-underline">
+              Gallery
             </Link>
-            <Link to="/contact" className="link-underline hover:text-foreground">
-              Terms
+
+            <Link to="/about" className="link-underline">
+              Artist
             </Link>
+
+            <Link to="/journal" className="link-underline">
+              Journal
+            </Link>
+
+            <Link to="/contact" className="link-underline">
+              Contact
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <span className="label">Elsewhere</span>
+
+            <span>Instagram</span>
+            <span>Behance</span>
+            <span>emailkamleshsahoo@gmail.com</span>
           </div>
         </div>
       </div>
+
+      <p className="label mt-12">
+        © {new Date().getFullYear()} Painttheory. All works original.
+      </p>
     </footer>
   );
 }

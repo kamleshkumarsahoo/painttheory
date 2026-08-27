@@ -3,6 +3,7 @@ import {
   Outlet,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -80,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "One-of-a-kind acrylic paintings inspired by places, memories and emotions. Collect an original or commission a bespoke artwork.",
       },
       { name: "author", content: "Maison Studio" },
-      { name: "theme-color", content: "#faf8f5" },
+      { name: "theme-color", content: "#fdfbf7" },
       { property: "og:title", content: "Maison — Original Artworks that Carry Stories" },
       {
         property: "og:description",
@@ -103,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Jost:wght@300..600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap",
       },
     ],
   }),
@@ -129,17 +130,22 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
+
+  const isAdmin = location.pathname.startsWith("/admin");
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col">
-        <SiteHeader />
+        {!isAdmin && <SiteHeader />}
+
         <main className="flex-1">
-          {/* Nested routes render here. Do not remove <Outlet />. */}
           <Outlet />
         </main>
-        <SiteFooter />
+
+        {!isAdmin && <SiteFooter />}
       </div>
+
       <Toaster />
     </QueryClientProvider>
   );

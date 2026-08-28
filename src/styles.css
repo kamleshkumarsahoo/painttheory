@@ -187,7 +187,6 @@
   font-family: var(--font-mono);
   font-size: 0.625rem;
   letter-spacing: 0.18em;
-  text-transform: uppercase;
   color: var(--muted-foreground);
 }
 
@@ -542,7 +541,7 @@
   position: relative;
   display: block;
   isolation: isolate;
-  font-family: var(--font-display);
+  font-family: "Melodrama";
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 1;
@@ -585,4 +584,45 @@
   .morph-text {
     animation: none;
   }
+}
+
+
+@font-face {
+  font-family: "Dancing Script";
+  src: url("/src/assets/fonts/DancingScript-Variable.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kohinoor Zerone One";
+  src: url("/src/assets/fonts/KohinoorZerone-One.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kohinoor Zerone Zero";
+  src: url("/src/assets/fonts/KohinoorZerone-Zero.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Melodrama";
+  src: url("/src/assets/fonts/Melodrama-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pencerio";
+  src: url("/src/assets/fonts/Pencerio-Hairline.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
 }

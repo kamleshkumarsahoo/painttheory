@@ -8,11 +8,15 @@ export function HomeHero() {
   return (
     <section className="relative overflow-hidden px-5 pb-16 pt-32 md:px-10 md:pb-28 md:pt-24">
       <div className="relative mx-auto max-w-[1400px]">
-        <Reveal><span className="label">Studio of Kamlesh Sahoo · est. 2026</span></Reveal>
         <Reveal delay={1}><PaintWordmark
             text="Painttheory"
             className="mt-6 text-[17vw] md:text-[11.5vw]"
         /></Reveal>
+        <Reveal delay={2}>
+          <span className="label">
+            by KAMLESH SAHOO
+          </span>
+        </Reveal>
         <Reveal delay={2} className="hairline mt-10 grid gap-8 pt-8 md:grid-cols-[1.2fr_1fr]">
           <p className="max-w-l text-base leading-relaxed md:text-lg">
             This is where I put my paintings. Some stay here. Some find new walls.

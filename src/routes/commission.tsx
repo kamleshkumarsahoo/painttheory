@@ -13,7 +13,7 @@ import { useState } from "react";
 export const Route = createFileRoute("/commission")({
   head: () => ({
     meta: [
-      { title: "Commission • PainthTheory" },
+      { title: "Commission • PaintTheory" },
       {
         name: "description",
         content:

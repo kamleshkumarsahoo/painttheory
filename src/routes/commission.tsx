@@ -13,7 +13,7 @@ import { useState } from "react";
 export const Route = createFileRoute("/commission")({
   head: () => ({
     meta: [
-      { title: "Request a painting • PainthTheory" },
+      { title: "Commission • PainthTheory" },
       {
         name: "description",
         content:
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/commission")({
       },
       {
         property: "og:title",
-        content: "Request a painting • PaintTheory",
+        content: "Commission • PaintTheory",
       },
       {
         property: "og:description",

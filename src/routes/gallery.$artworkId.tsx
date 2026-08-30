@@ -36,7 +36,7 @@ export const Route = createFileRoute("/gallery/$artworkId")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Artwork not found • PaintTheory" },
+          { title: "Artwork Not Found • PaintTheory" },
           { name: "robots", content: "noindex" },
         ],
       };

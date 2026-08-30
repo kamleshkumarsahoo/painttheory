@@ -7,7 +7,24 @@ import type { Artwork } from "@/types/artwork";
 import { getAllArtworks } from "@/services/artwork.service";
 import { ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/gallery/")({ component: GalleryPage });
+export const Route = createFileRoute("/gallery/")({
+  head: () => ({
+    meta: [
+      { title: "Gallery • PaintTheory" },
+      {
+        name: "description",
+        content:
+          "Artwork Gallery of PaintTheory, You can find all the artworks here.",
+      },
+      { property: "og:title", content: "Gallery • PaintTheory" },
+      {
+        property: "og:description",
+        content: "Artwork Gallery of PaintTheory, You can find all the artworks here.",
+      },
+    ],
+  }),
+  component: GalleryPage 
+});
 
 function GalleryPage() {
   const [filter, setFilter] = useState("All");

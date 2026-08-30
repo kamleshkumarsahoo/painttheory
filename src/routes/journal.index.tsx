@@ -9,6 +9,21 @@ import {
 } from "@/services/journal.service";
 
 export const Route = createFileRoute("/journal/")({
+  head: () => ({
+    meta: [
+      { title: "Journal • PaintTheory" },
+      {
+        name: "description",
+        content:
+          "Journal, stories and insights on artwork, process and life by Kamlesh Sahoo",
+      },
+      { property: "og:title", content: "Journal • PaintTheory" },
+      {
+        property: "og:description",
+        content: "Journal, stories and insights on artwork, process and life by Kamlesh Sahoo",
+      },
+    ],
+  }),
   component: JournalPage,
 });
 

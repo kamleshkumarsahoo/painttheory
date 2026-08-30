@@ -16,15 +16,15 @@ import photo9 from "@/assets/a-grid-1.jpeg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About the Artist • PaintTheory" },
+      { title: "About • PaintTheory" },
       {
         name: "description",
         content:
-          "The story behind PaintTheory | a passionate persion painting the feeling of places, memories and emotions in different art works.",
+          "The story behind PaintTheory, a passionate persion painting the feeling of places, memories and emotions in different art works.",
       },
       {
         property: "og:title",
-        content: "About the Artist • PaintTheory",
+        content: "About • PaintTheory",
       },
       {
         property: "og:description",

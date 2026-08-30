@@ -9,7 +9,7 @@ import { supabase } from "@/lib/supabase";
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Studio Admin - PaintTheory" },
+      { title: "Admin • PaintTheory" },
       {
         name: "description",
         content: "Private studio dashboard for managing artworks and collector inquiries.",

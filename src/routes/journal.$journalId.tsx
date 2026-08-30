@@ -56,7 +56,7 @@ export const Route = createFileRoute(
     return {
       meta: [
         {
-          title: `${journal.title} — Journal`,
+          title: `${journal.title} • PaintTheory`,
         },
         {
           name: "description",

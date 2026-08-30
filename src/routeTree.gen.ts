@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TestxxxRouteImport } from './routes/testxxx'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as GalleryRouteImport } from './routes/gallery'
@@ -39,11 +38,6 @@ import { Route as AdminInquiriesInquiryIdRouteImport } from './routes/admin/inqu
 import { Route as AdminArtworksNewRouteImport } from './routes/admin/artworks/new'
 import { Route as AdminArtworksArtworkIdRouteImport } from './routes/admin/artworks/$artworkId'
 
-const TestxxxRoute = TestxxxRouteImport.update({
-  id: '/testxxx',
-  path: '/testxxx',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -196,7 +190,6 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/testxxx': typeof TestxxxRoute
   '/admin/artworks': typeof AdminArtworksRouteRouteWithChildren
   '/admin/journal': typeof AdminJournalRouteRouteWithChildren
   '/admin/contact-messages': typeof AdminContactMessagesRoute
@@ -224,7 +217,6 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/feedback': typeof FeedbackRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/testxxx': typeof TestxxxRoute
   '/admin/contact-messages': typeof AdminContactMessagesRoute
   '/admin/customer-feedback': typeof AdminCustomerFeedbackRoute
   '/admin/feedback': typeof AdminFeedbackRoute
@@ -254,7 +246,6 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/testxxx': typeof TestxxxRoute
   '/admin/artworks': typeof AdminArtworksRouteRouteWithChildren
   '/admin/journal': typeof AdminJournalRouteRouteWithChildren
   '/admin/contact-messages': typeof AdminContactMessagesRoute
@@ -287,7 +278,6 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/journal'
     | '/sitemap.xml'
-    | '/testxxx'
     | '/admin/artworks'
     | '/admin/journal'
     | '/admin/contact-messages'
@@ -315,7 +305,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/feedback'
     | '/sitemap.xml'
-    | '/testxxx'
     | '/admin/contact-messages'
     | '/admin/customer-feedback'
     | '/admin/feedback'
@@ -344,7 +333,6 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/journal'
     | '/sitemap.xml'
-    | '/testxxx'
     | '/admin/artworks'
     | '/admin/journal'
     | '/admin/contact-messages'
@@ -376,20 +364,12 @@ export interface RootRouteChildren {
   GalleryRoute: typeof GalleryRouteWithChildren
   JournalRoute: typeof JournalRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  TestxxxRoute: typeof TestxxxRoute
   CommissionPaymentPaymentIdRoute: typeof CommissionPaymentPaymentIdRoute
   OrderTokenRoute: typeof OrderTokenRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/testxxx': {
-      id: '/testxxx'
-      path: '/testxxx'
-      fullPath: '/testxxx'
-      preLoaderRoute: typeof TestxxxRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -677,7 +657,6 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryRoute: GalleryRouteWithChildren,
   JournalRoute: JournalRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  TestxxxRoute: TestxxxRoute,
   CommissionPaymentPaymentIdRoute: CommissionPaymentPaymentIdRoute,
   OrderTokenRoute: OrderTokenRoute,
 }

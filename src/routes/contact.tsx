@@ -17,13 +17,13 @@ import { socials } from "@/lib/socials";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — PaintTheory" },
+      { title: "Contact • PaintTheory" },
       {
         name: "description",
         content:
           "Get in touch about artwork, commissions, ideas or simply to say hello.",
       },
-      { property: "og:title", content: "Contact — PaintTheory" },
+      { property: "og:title", content: "Contact • PaintTheory" },
       {
         property: "og:description",
         content: "Get in touch with PaintTheory.",

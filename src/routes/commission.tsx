@@ -121,7 +121,7 @@ function CommissionPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="mx-auto max-w-4xl px-6 pt-20 text-center lg:pt-28">
+      <section className="mx-auto max-w-4xl px-6 pt-24 text-center lg:pt-26">
         <Reveal>
           <p className="eyebrow">Commissions</p>
 

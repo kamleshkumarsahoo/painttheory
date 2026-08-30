@@ -13,6 +13,7 @@ import { Route as TestxxxRouteImport } from './routes/testxxx'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as FeedbackRouteImport } from './routes/feedback'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CommissionRouteImport } from './routes/commission'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -26,6 +27,7 @@ import { Route as JournalJournalIdRouteImport } from './routes/journal.$journalI
 import { Route as GalleryArtworkIdRouteImport } from './routes/gallery.$artworkId'
 import { Route as CommissionPaymentPaymentIdRouteImport } from './routes/commission-payment/$paymentId'
 import { Route as AdminFeedbackRouteImport } from './routes/admin/feedback'
+import { Route as AdminCustomerFeedbackRouteImport } from './routes/admin/customer-feedback'
 import { Route as AdminContactMessagesRouteImport } from './routes/admin/contact-messages'
 import { Route as AdminJournalRouteRouteImport } from './routes/admin/journal/route'
 import { Route as AdminArtworksRouteRouteImport } from './routes/admin/artworks/route'
@@ -55,6 +57,11 @@ const JournalRoute = JournalRouteImport.update({
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeedbackRoute = FeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -123,6 +130,11 @@ const AdminFeedbackRoute = AdminFeedbackRouteImport.update({
   path: '/feedback',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCustomerFeedbackRoute = AdminCustomerFeedbackRouteImport.update({
+  id: '/customer-feedback',
+  path: '/customer-feedback',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminContactMessagesRoute = AdminContactMessagesRouteImport.update({
   id: '/contact-messages',
   path: '/contact-messages',
@@ -180,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/commission': typeof CommissionRoute
   '/contact': typeof ContactRoute
+  '/feedback': typeof FeedbackRoute
   '/gallery': typeof GalleryRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -187,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/admin/artworks': typeof AdminArtworksRouteRouteWithChildren
   '/admin/journal': typeof AdminJournalRouteRouteWithChildren
   '/admin/contact-messages': typeof AdminContactMessagesRoute
+  '/admin/customer-feedback': typeof AdminCustomerFeedbackRoute
   '/admin/feedback': typeof AdminFeedbackRoute
   '/commission-payment/$paymentId': typeof CommissionPaymentPaymentIdRoute
   '/gallery/$artworkId': typeof GalleryArtworkIdRoute
@@ -208,9 +222,11 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/commission': typeof CommissionRoute
   '/contact': typeof ContactRoute
+  '/feedback': typeof FeedbackRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/testxxx': typeof TestxxxRoute
   '/admin/contact-messages': typeof AdminContactMessagesRoute
+  '/admin/customer-feedback': typeof AdminCustomerFeedbackRoute
   '/admin/feedback': typeof AdminFeedbackRoute
   '/commission-payment/$paymentId': typeof CommissionPaymentPaymentIdRoute
   '/gallery/$artworkId': typeof GalleryArtworkIdRoute
@@ -234,6 +250,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/commission': typeof CommissionRoute
   '/contact': typeof ContactRoute
+  '/feedback': typeof FeedbackRoute
   '/gallery': typeof GalleryRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -241,6 +258,7 @@ export interface FileRoutesById {
   '/admin/artworks': typeof AdminArtworksRouteRouteWithChildren
   '/admin/journal': typeof AdminJournalRouteRouteWithChildren
   '/admin/contact-messages': typeof AdminContactMessagesRoute
+  '/admin/customer-feedback': typeof AdminCustomerFeedbackRoute
   '/admin/feedback': typeof AdminFeedbackRoute
   '/commission-payment/$paymentId': typeof CommissionPaymentPaymentIdRoute
   '/gallery/$artworkId': typeof GalleryArtworkIdRoute
@@ -265,6 +283,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/commission'
     | '/contact'
+    | '/feedback'
     | '/gallery'
     | '/journal'
     | '/sitemap.xml'
@@ -272,6 +291,7 @@ export interface FileRouteTypes {
     | '/admin/artworks'
     | '/admin/journal'
     | '/admin/contact-messages'
+    | '/admin/customer-feedback'
     | '/admin/feedback'
     | '/commission-payment/$paymentId'
     | '/gallery/$artworkId'
@@ -293,9 +313,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/commission'
     | '/contact'
+    | '/feedback'
     | '/sitemap.xml'
     | '/testxxx'
     | '/admin/contact-messages'
+    | '/admin/customer-feedback'
     | '/admin/feedback'
     | '/commission-payment/$paymentId'
     | '/gallery/$artworkId'
@@ -318,6 +340,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/commission'
     | '/contact'
+    | '/feedback'
     | '/gallery'
     | '/journal'
     | '/sitemap.xml'
@@ -325,6 +348,7 @@ export interface FileRouteTypes {
     | '/admin/artworks'
     | '/admin/journal'
     | '/admin/contact-messages'
+    | '/admin/customer-feedback'
     | '/admin/feedback'
     | '/commission-payment/$paymentId'
     | '/gallery/$artworkId'
@@ -348,6 +372,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   CommissionRoute: typeof CommissionRoute
   ContactRoute: typeof ContactRoute
+  FeedbackRoute: typeof FeedbackRoute
   GalleryRoute: typeof GalleryRouteWithChildren
   JournalRoute: typeof JournalRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -384,6 +409,13 @@ declare module '@tanstack/react-router' {
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feedback': {
+      id: '/feedback'
+      path: '/feedback'
+      fullPath: '/feedback'
+      preLoaderRoute: typeof FeedbackRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -475,6 +507,13 @@ declare module '@tanstack/react-router' {
       path: '/feedback'
       fullPath: '/admin/feedback'
       preLoaderRoute: typeof AdminFeedbackRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/customer-feedback': {
+      id: '/admin/customer-feedback'
+      path: '/customer-feedback'
+      fullPath: '/admin/customer-feedback'
+      preLoaderRoute: typeof AdminCustomerFeedbackRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/contact-messages': {
@@ -584,6 +623,7 @@ interface AdminRouteChildren {
   AdminArtworksRouteRoute: typeof AdminArtworksRouteRouteWithChildren
   AdminJournalRouteRoute: typeof AdminJournalRouteRouteWithChildren
   AdminContactMessagesRoute: typeof AdminContactMessagesRoute
+  AdminCustomerFeedbackRoute: typeof AdminCustomerFeedbackRoute
   AdminFeedbackRoute: typeof AdminFeedbackRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminInquiriesInquiryIdRoute: typeof AdminInquiriesInquiryIdRoute
@@ -593,6 +633,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminArtworksRouteRoute: AdminArtworksRouteRouteWithChildren,
   AdminJournalRouteRoute: AdminJournalRouteRouteWithChildren,
   AdminContactMessagesRoute: AdminContactMessagesRoute,
+  AdminCustomerFeedbackRoute: AdminCustomerFeedbackRoute,
   AdminFeedbackRoute: AdminFeedbackRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminInquiriesInquiryIdRoute: AdminInquiriesInquiryIdRoute,
@@ -632,6 +673,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   CommissionRoute: CommissionRoute,
   ContactRoute: ContactRoute,
+  FeedbackRoute: FeedbackRoute,
   GalleryRoute: GalleryRouteWithChildren,
   JournalRoute: JournalRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

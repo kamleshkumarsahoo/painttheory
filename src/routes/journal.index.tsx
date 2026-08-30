@@ -40,7 +40,7 @@ function JournalPage() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-[1400px] px-5 pb-24 md:px-10 md:pt-30">
+    <div className="mx-auto max-w-[1400px] px-5 pt-24 md:px-10 md:pt-26">
       <Reveal>
         <span className="label">From the studio</span>
 

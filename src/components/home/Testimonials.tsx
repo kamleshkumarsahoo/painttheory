@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-
 import { Reveal } from "@/components/common/Reveal";
 import {
   getFeedback,
@@ -9,18 +8,13 @@ import {
 export function Testimonials() {
   const [feedback, setFeedback] = useState<Feedback[]>([]);
   const [start, setStart] = useState(0);
-  const [step, setStep] = useState(340);
+  const [step, setStep] = useState(300);
   const [paused, setPaused] = useState(false);
   const [dragging, setDragging] = useState(false);
 
-  const wrapRef =
-    useRef<HTMLDivElement>(null);
-
-  const sliderRef =
-    useRef<HTMLDivElement>(null);
-
-  const resumeTimerRef =
-    useRef<number | null>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const resumeTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     getFeedback()
@@ -28,47 +22,50 @@ export function Testimonials() {
       .catch(console.error);
   }, []);
 
+  /* ============================================================
+     MEASURE CAROUSEL
+  ============================================================ */
+
   useEffect(() => {
     const measure = () => {
-      const width =
-        wrapRef.current?.offsetWidth ?? 1000;
+      const width = wrapRef.current?.offsetWidth ?? 1000;
 
       setStep(
         Math.max(
-          180,
-          Math.min(430, width * 0.38),
+          150,
+          Math.min(300, width * 0.25),
         ),
       );
     };
 
     measure();
 
-    window.addEventListener(
-      "resize",
-      measure,
-    );
+    window.addEventListener("resize", measure);
 
-    return () =>
-      window.removeEventListener(
-        "resize",
-        measure,
-      );
+    return () => {
+      window.removeEventListener("resize", measure);
+    };
   }, []);
 
-  function pauseTemporarily() {
+  /* ============================================================
+     TEMPORARY PAUSE AFTER INTERACTION
+  ============================================================ */
+
+  const pauseTemporarily = () => {
     setPaused(true);
 
     if (resumeTimerRef.current) {
-      window.clearTimeout(
-        resumeTimerRef.current,
-      );
+      window.clearTimeout(resumeTimerRef.current);
     }
 
-    resumeTimerRef.current =
-      window.setTimeout(() => {
-        setPaused(false);
-      }, 1200);
-  }
+    resumeTimerRef.current = window.setTimeout(() => {
+      setPaused(false);
+    }, 1200);
+  };
+
+  /* ============================================================
+     AUTOPLAY
+  ============================================================ */
 
   useEffect(() => {
     if (feedback.length <= 1) return;
@@ -84,19 +81,23 @@ export function Testimonials() {
     if (paused || dragging) return;
 
     const interval = window.setInterval(() => {
-      setStart(
-        (current) =>
-          (current + 1) % feedback.length,
-      );
+      setStart((current) => {
+        return (current + 1) % feedback.length;
+      });
     }, 3200);
 
-    return () =>
+    return () => {
       window.clearInterval(interval);
+    };
   }, [
     feedback.length,
     paused,
     dragging,
   ]);
+
+  /* ============================================================
+     CLEANUP
+  ============================================================ */
 
   useEffect(() => {
     return () => {
@@ -108,40 +109,41 @@ export function Testimonials() {
     };
   }, []);
 
-  function setFromPosition(
-    clientX: number,
-  ) {
-    const track =
-      sliderRef.current;
+  /* ============================================================
+     SLIDER
+  ============================================================ */
+
+  const setFromPosition = (clientX: number) => {
+    const track = sliderRef.current;
 
     if (!track || feedback.length <= 1) {
       return;
     }
 
-    const rect =
-      track.getBoundingClientRect();
+    const rect = track.getBoundingClientRect();
 
-    const percentage =
-      Math.max(
-        0,
-        Math.min(
-          1,
-          (clientX - rect.left) /
-            rect.width,
-        ),
-      );
+    const percentage = Math.max(
+      0,
+      Math.min(
+        1,
+        (clientX - rect.left) / rect.width,
+      ),
+    );
 
     const index = Math.round(
-      percentage *
-        (feedback.length - 1),
+      percentage * (feedback.length - 1),
     );
 
     setStart(index);
-  }
+  };
 
-  function handlePointerDown(
+  /* ============================================================
+     POINTER EVENTS
+  ============================================================ */
+
+  const handlePointerDown = (
     event: React.PointerEvent<HTMLDivElement>,
-  ) {
+  ) => {
     if (feedback.length <= 1) return;
 
     setDragging(true);
@@ -152,19 +154,19 @@ export function Testimonials() {
     );
 
     setFromPosition(event.clientX);
-  }
+  };
 
-  function handlePointerMove(
+  const handlePointerMove = (
     event: React.PointerEvent<HTMLDivElement>,
-  ) {
+  ) => {
     if (!dragging) return;
 
     setFromPosition(event.clientX);
-  }
+  };
 
-  function handlePointerUp(
+  const handlePointerUp = (
     event: React.PointerEvent<HTMLDivElement>,
-  ) {
+  ) => {
     setDragging(false);
 
     try {
@@ -174,22 +176,17 @@ export function Testimonials() {
     } catch {
       // Pointer capture may already be released.
     }
-  }
+  };
 
   if (!feedback.length) {
     return null;
   }
 
-  const visible = [-1, 0, 1, 2, 3].map(
-    (offset) => ({
-      offset,
-      feedbackIndex:
-        (start +
-          offset +
-          feedback.length * 2) %
-        feedback.length,
-    }),
-  );
+  /* ============================================================
+     VISIBLE CARDS
+  ============================================================ */
+
+  const visiblePositions = [-1, 0, 1];
 
   const sliderProgress =
     feedback.length <= 1
@@ -197,216 +194,343 @@ export function Testimonials() {
       : start / (feedback.length - 1);
 
   return (
-    <section className="mx-auto w-full max-w-[1400px] px-5 pb-20 md:px-10 md:pb-28">
-      <Reveal className="hairline flex flex-wrap items-baseline justify-between gap-4 pt-8">
-        <h2 className="display text-5xl md:text-6xl">
-          In their words
-        </h2>
+    <section className="w-full bg-[#eee9df]">
 
-        <span className="label">
-          From the people who found the work
-        </span>
-      </Reveal>
+      <div
+        className="
+          mx-auto
+          w-full
+          max-w-[1400px]
+          px-0
+          pb-1
+          md:px-10
+          md:pb-5
+        "
+      >
 
-      <Reveal className="mt-12">
-        <div
-          ref={wrapRef}
-          className="relative mt-4 h-[520px] w-full overflow-hidden md:h-[620px]"
+        {/* ======================================================
+            HEADER + CONTROLS
+        ====================================================== */}
+
+        <Reveal
+          className="
+            flex
+            flex-wrap
+            items-end
+            justify-between
+            px-5
+            gap-6
+            pt-8
+            md:pt-12
+          "
         >
-          {visible.map(
-            ({
-              offset,
-              feedbackIndex,
-            }) => {
-              const item =
-                feedback[feedbackIndex];
 
-              if (!item) return null;
+          {/* Heading */}
+
+          <div>
+            <h2 className="display text-5xl md:text-6xl">
+              In their words
+            </h2>
+
+            <span className="label mt-2 block">
+              From the people who found the work
+            </span>
+          </div>
+
+
+          {/* ====================================================
+              CAROUSEL CONTROLS
+          ==================================================== */}
+
+          {feedback.length > 1 && (
+            <div className="flex items-center gap-3 pb-1">
+
+              {/* Play / Pause */}
+
+              <button
+                type="button"
+                aria-label={
+                  paused
+                    ? "Play feedback rotation"
+                    : "Pause feedback rotation"
+                }
+                onClick={() => {
+                  setPaused(
+                    (current) => !current,
+                  );
+                }}
+                className="
+                  flex
+                  size-4
+                  items-center
+                  justify-center
+                  text-muted-foreground/80
+                  transition-colors
+                  hover:text-foreground
+                "
+              >
+                {paused ? (
+                  <svg
+                    viewBox="0 0 12 12"
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M3 2.1v7.8L9.5 6z" />
+                  </svg>
+                ) : (
+                  <svg
+                    viewBox="0 0 12 12"
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="2.5"
+                      y="2"
+                      width="2"
+                      height="8"
+                      rx=".4"
+                    />
+
+                    <rect
+                      x="7.5"
+                      y="2"
+                      width="2"
+                      height="8"
+                      rx=".4"
+                    />
+                  </svg>
+                )}
+              </button>
+
+
+              {/* Slider */}
+
+              <div
+                ref={sliderRef}
+                role="slider"
+                aria-label="Feedback position"
+                aria-valuemin={0}
+                aria-valuemax={
+                  feedback.length - 1
+                }
+                aria-valuenow={start}
+                tabIndex={0}
+                onPointerDown={
+                  handlePointerDown
+                }
+                onPointerMove={
+                  handlePointerMove
+                }
+                onPointerUp={
+                  handlePointerUp
+                }
+                onPointerCancel={
+                  handlePointerUp
+                }
+                onKeyDown={(event) => {
+
+                  if (
+                    event.key ===
+                    "ArrowRight"
+                  ) {
+                    event.preventDefault();
+                    pauseTemporarily();
+                    setStart(
+                      (current) =>
+                        (current + 1) %
+                        feedback.length,
+                    );
+                  }
+
+                  if (
+                    event.key ===
+                    "ArrowLeft"
+                  ) {
+                    event.preventDefault();
+                    pauseTemporarily();
+                    setStart(
+                      (current) =>
+                        (current -
+                          1 +
+                          feedback.length) %
+                        feedback.length,
+                    );
+                  }
+
+                  if (
+                    event.key ===
+                    "Home"
+                  ) {
+                    event.preventDefault();
+                    pauseTemporarily();
+                    setStart(0);
+                  }
+                  if (
+                    event.key ===
+                    "End"
+                  ) {
+                    event.preventDefault();
+                    pauseTemporarily();
+                    setStart(
+                      feedback.length - 1,
+                    );
+                  }
+                }}
+                className="
+                  relative
+                  h-3
+                  w-[320px]
+                  cursor-pointer
+                  touch-none
+                  select-none
+                  rounded-[2px]
+                  bg-border/50
+                  outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-clay/20
+                  md:w-[240px]
+                "
+              >
+
+                <div
+                  className={[
+                    "absolute top-0 h-3 w-12 rounded-[2px] bg-muted-foreground/40",
+                    dragging
+                      ? "cursor-grabbing"
+                      : "cursor-grab",
+                  ].join(" ")}
+                  style={{
+                    left:
+                      feedback.length <= 1
+                        ? "0px"
+                        : `calc(${sliderProgress * 100}% - ${
+                            sliderProgress * 48
+                          }px)`,
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </Reveal>
+
+
+        {/* ======================================================
+            CAROUSEL
+        ====================================================== */}
+
+        <Reveal className="mt-2 md:mt-6">
+
+          <div
+            ref={wrapRef}
+            className="
+              relative
+              h-[380px]
+              w-full
+              overflow-hidden
+              md:h-[440px]
+            "
+          >
+
+            {feedback.map((item, index) => {
+
+              let relative = index - start;
+
+              const length = feedback.length;
+
+              /* Circular wrapping */
+
+              if (relative > length / 2) {
+                relative -= length;
+              }
+
+              if (relative < -length / 2) {
+                relative += length;
+              }
+
+              /*
+               * Only show:
+               * left / center / right
+               */
+
+              if (
+                !visiblePositions.includes(
+                  relative,
+                )
+              ) {
+                return null;
+              }
 
               const isCenter =
-                offset === 1;
+                relative === 0;
 
               const x =
-                (offset - 1) * step;
+                relative * step;
 
-              const hidden =
-                offset === -1 ||
-                offset === 3;
+              const scale = isCenter
+                ? 1
+                : 0.88;
+
+              const opacity = isCenter
+                ? 1
+                : 0.72;
+
+              const zIndex = isCenter
+                ? 30
+                : 20;
 
               return (
                 <figure
-                  key={`${item.id}-${offset}`}
-                  onPointerEnter={() => {
-                    setPaused(true);
-                  }}
-                  onPointerLeave={() => {
-                    setPaused(false);
-                  }}
-                  onPointerDown={() => {
-                    setPaused(true);
-                  }}
-                  onPointerUp={() => {
-                    setPaused(false);
-                  }}
-                  onPointerCancel={() => {
-                    setPaused(false);
-                  }}
-                  className="absolute left-1/2 top-1/2 w-[300px] overflow-hidden rounded-2xl border border-border bg-card shadow-[0_1px_2px_rgba(0,0,0,0.04),0_18px_40px_-20px_rgba(0,0,0,0.3)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] md:w-[360px] lg:w-[420px]"
+                  key={item.id}
+                  className="
+                    absolute
+                    left-1/2
+                    top-1/2
+                    w-[260px]
+                    overflow-hidden
+                    rounded-2xl
+                    border
+                    border-border
+                    bg-card
+                    shadow-[0_1px_2px_rgba(0,0,0,0.04),0_18px_40px_-20px_rgba(0,0,0,0.3)]
+                    transition-all
+                    duration-1000
+                    ease-[cubic-bezier(0.22,1,0.36,1)]
+                    sm:w-[290px]
+                    md:w-[340px]
+                    lg:w-[390px]
+                  "
                   style={{
                     transform: `
                       translate(-50%, -50%)
                       translateX(${x}px)
-                      scale(${isCenter ? 1.08 : 0.86})
+                      scale(${scale})
                     `,
-                    opacity: hidden
-                      ? 0
-                      : isCenter
-                        ? 1
-                        : 0.65,
-                    filter: hidden
-                      ? "blur(6px)"
-                      : isCenter
-                        ? "none"
-                        : "saturate(0.85)",
-                    zIndex: isCenter
-                      ? 20
-                      : 10,
-                    pointerEvents: hidden
-                      ? "none"
-                      : "auto",
+                    opacity,
+                    zIndex,
                   }}
                 >
+
                   <img
                     src={item.imageUrl}
                     alt="Collector feedback"
                     loading="lazy"
-                    className="block h-auto w-full object-contain"
+                    className="
+                      block
+                      h-auto
+                      w-full
+                      object-contain
+                    "
                   />
+
                 </figure>
               );
-            },
-          )}
-        </div>
+            })}
 
-        {/* Slider + play/pause */}
-        {feedback.length > 1 && (
-          <div className="mt-8 flex items-center justify-center gap-3">
-            {/* Play / Pause */}
-            <button
-              type="button"
-              aria-label={
-                paused
-                  ? "Play feedback rotation"
-                  : "Pause feedback rotation"
-              }
-              onClick={() => {
-                setPaused((current) => !current);
-              }}
-              className="flex size-4 items-center justify-center text-muted-foreground/80 transition-colors hover:text-foreground"
-            >
-              {paused ? (
-                <svg
-                  viewBox="0 0 12 12"
-                  className="h-4.5 w-4.5"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M3 2.1v7.8L9.5 6z" />
-                </svg>
-              ) : (
-                <svg
-                  viewBox="0 0 12 12"
-                  className="h-4 w-4"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <rect
-                    x="2.5"
-                    y="2"
-                    width="2"
-                    height="8"
-                    rx=".4"
-                  />
-                  <rect
-                    x="7.5"
-                    y="2"
-                    width="2"
-                    height="8"
-                    rx=".4"
-                  />
-                </svg>
-              )}
-            </button>
-
-            {/* Slider */}
-            <div
-              ref={sliderRef}
-              role="slider"
-              aria-label="Feedback position"
-              aria-valuemin={0}
-              aria-valuemax={feedback.length - 1}
-              aria-valuenow={start}
-              tabIndex={0}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={handlePointerUp}
-              onPointerCancel={handlePointerUp}
-              onKeyDown={(event) => {
-                if (event.key === "ArrowRight") {
-                  event.preventDefault();
-                  pauseTemporarily();
-
-                  setStart(
-                    (current) =>
-                      (current + 1) % feedback.length,
-                  );
-                }
-
-                if (event.key === "ArrowLeft") {
-                  event.preventDefault();
-                  pauseTemporarily();
-
-                  setStart(
-                    (current) =>
-                      (current - 1 + feedback.length) %
-                      feedback.length,
-                  );
-                }
-
-                if (event.key === "Home") {
-                  event.preventDefault();
-                  pauseTemporarily();
-                  setStart(0);
-                }
-
-                if (event.key === "End") {
-                  event.preventDefault();
-                  pauseTemporarily();
-                  setStart(feedback.length - 1);
-                }
-              }}
-              className="relative h-3 w-[220px] cursor-pointer touch-none select-none rounded-[2px] bg-border/50 outline-none focus-visible:ring-2 focus-visible:ring-clay/20 md:w-[380px]"
-            >
-              <div
-                className={[
-                  "absolute top-0 h-3 w-12 rounded-[2px] bg-muted-foreground/40",
-                  dragging
-                    ? "cursor-grabbing"
-                    : "cursor-grab",
-                ].join(" ")}
-                style={{
-                  left:
-                    feedback.length <= 1
-                      ? "0px"
-                      : `calc(${sliderProgress * 100}% - ${
-                          sliderProgress * 48
-                        }px)`,
-                }}
-              />
-            </div>
           </div>
-        )}
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   );
 }

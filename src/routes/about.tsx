@@ -49,7 +49,7 @@ const cards = [
 
 function AboutPage() {
   return (
-    <div className="mx-auto max-w-[1400px] px-5 pb-20 pt-16 md:px-10 md:pb-32 md:pt-24">
+    <div className="mx-auto max-w-[1400px] px-5 pb-20 pt-24 md:px-10 md:pb-32 md:pt-26">
       {/* PAGE HERO */}
       <Reveal>
         <div className="mb-16 md:mb-20 text-center">
@@ -96,11 +96,11 @@ function AboutPage() {
 
           <div className="mt-10 flex flex-wrap gap-4">
             <Button asChild size="lg">
-              <Link to="/gallery">Explore the gallery</Link>
+              <Link to="/gallery">Explore the Gallery</Link>
             </Button>
 
             <Button asChild variant="outline" size="lg">
-              <Link to="/commission">Commission a piece</Link>
+              <Link to="/commission">Request a Painting</Link>
             </Button>
           </div>
         </Reveal>

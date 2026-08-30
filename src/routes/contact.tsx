@@ -116,7 +116,7 @@ function ContactPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+    <div className="mx-auto max-w-7xl px-6 pt-24 lg:px-10 lg:pt-26">
       <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
         <Reveal>
           <p className="eyebrow">Contact</p>

@@ -16,7 +16,7 @@ function GalleryPage() {
   const filters = ["All", ...Array.from(new Set(artworks.flatMap((art) => art.category.split(",").map((category) => category.trim()).filter(Boolean)))).sort(), "Available", "Sold"];
   const list = useMemo(() => filter === "All" ? artworks : filter === "Available" || filter === "Sold" ? artworks.filter((art) => art.availability === filter) : artworks.filter((art) => art.category.split(",").map((category) => category.trim()).includes(filter)), [artworks, filter]);
   return (
-    <div className="mx-auto max-w-[1400px] px-5 pb-24 pt-32 md:px-10 md:pt-20">
+    <div className="mx-auto max-w-[1400px] px-5 pt-24 md:px-10 md:pt-26">
       <Reveal>
         <span className="label">
           Complete works

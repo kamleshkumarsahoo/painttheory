@@ -10,7 +10,7 @@ export function CommissionCTA() {
           A painting starts with an idea
         </p>
 
-        <h2 className="display mt-5 max-w-4xl text-[11vw] leading-[0.85] md:text-[6vw]">
+        <h2 className="display text-5xl md:text-6xl">
           Scrolled this far?
           <br />
           Have a look around.
@@ -40,7 +40,7 @@ export function CommissionCTA() {
           >
             <div className="flex items-start justify-between gap-4">
               <h3 className="display text-2xl">
-                Commission an idea
+                Request a Painting
               </h3>
 
               <ArrowRight className="mt-1 size-5 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
@@ -57,7 +57,7 @@ export function CommissionCTA() {
           >
             <div className="flex items-start justify-between gap-4">
               <h3 className="display text-2xl">
-                Roam the gallery
+                Roam the Gallery
               </h3>
 
               <ArrowRight className="mt-1 size-5 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />

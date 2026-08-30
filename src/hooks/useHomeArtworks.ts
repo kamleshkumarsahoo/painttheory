@@ -19,7 +19,7 @@ export function useHomeArtworks() {
       .catch(console.error);
   }, []);
 
-  const selected = (featured.length ? featured : artworks).slice(0, 4);
+  const selected = (featured.length ? featured : artworks).slice(0, 10);
 
   return {
     artworks,

@@ -1,43 +1,228 @@
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/common/Reveal";
-import { PaintWordmark } from "@/components/paint-wordmark";
 import { ArrowRight } from "lucide-react";
-
+import bgPhoto from "@/assets/bg-photo1.jpg";
 
 export function HomeHero() {
   return (
-    <section className="relative overflow-hidden px-5 pb-16 pt-32 md:px-10 md:pb-28 md:pt-24">
-      <div className="relative mx-auto max-w-[1400px]">
-        <Reveal delay={1}><PaintWordmark
-            text="Painttheory"
-            className="mt-6 text-[17vw] md:text-[11.5vw]"
-        /></Reveal>
-        <Reveal delay={2}>
-          <span className="label">
-            by KAMLESH SAHOO
+    <section
+      className="
+        relative
+        min-h-[720px]
+        overflow-hidden
+        text-white
+        md:min-h-[calc(100svh-120px)]
+      "
+    >
+      {/* ======================================================
+          BACKGROUND IMAGE
+      ====================================================== */}
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+      >
+        <img
+          src={bgPhoto}
+          alt=""
+          className="
+            size-full
+            object-cover
+            object-center
+          "
+        />
+
+        {/* Soft overall overlay */}
+        <div className="absolute inset-0 bg-black/10" />
+
+        {/* Bottom readability */}
+        <div
+          className="
+            absolute
+            inset-x-0
+            bottom-0
+            h-[58%]
+            bg-gradient-to-t
+            from-black/70
+            via-black/30
+            to-transparent
+            md:h-[48%]
+          "
+        />
+      </div>
+
+
+      {/* ======================================================
+          CONTENT
+      ====================================================== */}
+
+      <div
+        className="
+          relative
+          mx-auto
+          flex
+          min-h-[720px]
+          max-w-[1400px]
+          flex-col
+          justify-between
+          px-5
+          pb-17
+          pt-30
+          md:min-h-[calc(100svh-120px)]
+          md:px-10
+          md:pb-12
+          md:pt-52
+        "
+      >
+
+        {/* ====================================================
+            WORDMARK
+        ==================================================== */}
+
+        <Reveal delay={1}>
+          <span
+            className="
+              block
+              whitespace-nowrap
+              text-[16vw]
+              leading-[0.85]
+              tracking-[-0.04em]
+              text-white
+              md:text-[11.5vw]
+              pb-3
+            "
+            style={{
+              fontFamily: "Melodrama",
+              fontWeight: 700,
+            }}
+          >
+            PaintTheory
           </span>
         </Reveal>
-        <Reveal delay={2} className="hairline mt-10 grid gap-8 pt-8 md:grid-cols-[1.2fr_1fr]">
-          <p className="max-w-l text-base leading-relaxed md:text-lg">
-            This is where I put my paintings. Some stay here. Some find new walls.
-            <br></br>A growing collection of original works made by hand, lived with for a while, and shared with the world.
-          </p>
-          <div className="flex flex-wrap items-start gap-x-8 gap-y-3 md:justify-end">
-            <Link to="/gallery" className="rounded-full bg-ink px-6 py-3 text-xs font-medium text-paper transition-opacity hover:opacity-85">
-              See available work
-            </Link>
-            <Link
-              to="/commission"
-              className="group inline-flex items-center gap-1.5 py-3 text-xs font-medium"
-            >
-              <span className="link-underline">
-                Commission something
-              </span>
 
-              <ArrowRight className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </div>
-        </Reveal>
+
+        {/* ====================================================
+            BOTTOM CONTENT
+        ==================================================== */}
+
+        <div>
+
+          {/* Artist */}
+
+          <Reveal delay={2}>
+            <span
+              className="
+                label
+                font-[500]
+                text-white/85
+              "
+            >
+              <span className="lowercase italic text-white/60">
+                by
+              </span>{" "}
+              KAMLESH SAHOO
+            </span>
+          </Reveal>
+
+
+          {/* Description + actions */}
+
+          <Reveal
+            delay={2}
+            className="
+              mt-5
+              grid
+              gap-6
+              border-t
+              border-white/25
+              pt-5
+              md:mt-6
+              md:grid-cols-[1.15fr_1fr]
+              md:gap-12
+              md:pt-6
+            "
+          >
+
+            {/* Description */}
+
+            <p
+              className="
+                max-w-xl
+                text-sm
+                leading-relaxed
+                text-white/90
+                md:text-base
+              "
+            >
+              This is where I put my paintings. Some stay here.
+              Some find new walls.
+              <br className="hidden md:block" />
+              A growing collection of original works made by
+              hand, lived with for a while, and shared with the
+              world.
+            </p>
+
+
+            {/* Actions */}
+
+            <div
+              className="
+                flex
+                flex-wrap
+                items-start
+                gap-x-7
+                gap-y-2
+                md:justify-end
+              "
+            >
+
+              <Link
+                to="/gallery"
+                className="
+                  rounded-full
+                  bg-white
+                  px-6
+                  py-3
+                  text-xs
+                  font-medium
+                  text-black
+                  transition-opacity
+                  hover:opacity-90
+                "
+              >
+                See available work
+              </Link>
+
+              <Link
+                to="/commission"
+                className="
+                  group
+                  inline-flex
+                  items-center
+                  gap-1.5
+                  py-3
+                  text-xs
+                  font-medium
+                  text-white
+                "
+              >
+                <span className="link-underline">
+                  Commission something
+                </span>
+
+                <ArrowRight
+                  className="
+                    size-4
+                    text-white/70
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                  "
+                />
+              </Link>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

@@ -34,8 +34,16 @@ export function AdminHeader() {
             <Link to="/admin">Inquiries</Link>
           </Button>
 
+          {/* Existing curated testimonials */}
           <Button asChild variant="ghost" size="sm">
             <Link to="/admin/feedback">Feedback</Link>
+          </Button>
+
+          {/* Customer-submitted feedback */}
+          <Button asChild variant="ghost" size="sm">
+            <Link to="/admin/customer-feedback">
+              Customer Feedback
+            </Link>
           </Button>
 
           <Button asChild variant="ghost" size="sm">

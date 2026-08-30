@@ -19,6 +19,48 @@ import {
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/admin/feedback")({
+  head: () => ({
+    meta: [
+      {
+        title: "Share Your Feedback | PaintTheory",
+      },
+      {
+        name: "description",
+        content:
+          "Had a PaintTheory artwork? I’d love to hear what you thought of it.",
+      },
+
+      // Open Graph
+      {
+        property: "og:title",
+        content: "Share Your Thoughts | PaintTheory",
+      },
+      {
+        property: "og:description",
+        content:
+          "Had a PaintTheory artwork? I’d love to hear what you thought of it.",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+
+      // Twitter / X
+      {
+        name: "twitter:card",
+        content: "summary",
+      },
+      {
+        name: "twitter:title",
+        content: "Share Your Thoughts | PaintTheory",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Had a PaintTheory artwork? I’d love to hear what you thought of it.",
+      },
+    ],
+  }),
   component: FeedbackPage,
 });
 

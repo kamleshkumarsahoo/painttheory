@@ -41,7 +41,7 @@ export const Route = createFileRoute(
         meta: [
           {
             title:
-              "Journal entry not found — Maison",
+              "Journal entry not found • PaintTheory",
           },
           {
             name: "robots",

@@ -36,7 +36,7 @@ export const Route = createFileRoute("/gallery/$artworkId")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Artwork not found — Maison" },
+          { title: "Artwork not found • PaintTheory" },
           { name: "robots", content: "noindex" },
         ],
       };
@@ -46,12 +46,12 @@ export const Route = createFileRoute("/gallery/$artworkId")({
 
     return {
       meta: [
-        { title: `${artwork.title} — Maison` },
+        { title: `${artwork.title} • PaintTheory` },
         {
           name: "description",
           content: `${artwork.title}. ${artwork.description ?? ""} ${artwork.dimensions}, ${artwork.medium}.`,
         },
-        { property: "og:title", content: `${artwork.title} — Maison` },
+        { property: "og:title", content: `${artwork.title} • PaintTheory` },
         { property: "og:description", content: artwork.story },
         { property: "og:image", content: artwork.image },
         { property: "og:type", content: "product" },
@@ -131,7 +131,7 @@ function ArtworkPage() {
               src={mainImage}
               alt={
                 selectedMedia?.altText ||
-                `${artwork.title} — ${artwork.medium}`
+                `${artwork.title} - ${artwork.medium}`
               }
               width={selectedMedia?.width ?? 1024}
               height={

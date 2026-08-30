@@ -14,7 +14,7 @@ export const Route = createFileRoute("/feedback")({
   head: () => ({
     meta: [
       {
-        title: "Share Your Thoughts - PaintTheory",
+        title: "Share Your Thoughts • PaintTheory",
       },
       {
         name: "description",
@@ -167,7 +167,7 @@ function FeedbackPage() {
               A little note
             </span>
 
-            <h1 className="display mt-5 text-5xl md:text-7xl">
+            <h1 className="display mt-5 text-3xl md:text-5xl">
               Share your thoughts
             </h1>
 

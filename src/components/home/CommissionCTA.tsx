@@ -5,8 +5,8 @@ import { ArrowRight } from "lucide-react";
 export function CommissionCTA() {
   return (
     <section className="mx-auto max-w-[1400px] px-5 pb-10 md:px-10">
-      <Reveal className="hairline pt-12">
-        <p className="label">
+      <Reveal className="hairline pt-8">
+        <p className="label pb-6">
           A painting starts with an idea
         </p>
 

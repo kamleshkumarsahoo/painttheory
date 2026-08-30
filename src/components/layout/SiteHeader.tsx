@@ -313,7 +313,7 @@ export function SiteHeader() {
                 className={`
                   link-underline
                   whitespace-nowrap
-                  text-[10px]
+                  text-[13px]
                   font-medium
                   transition-colors
                   duration-300

@@ -16,19 +16,19 @@ import photo9 from "@/assets/a-grid-1.jpeg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About the Artist  Maison" },
+      { title: "About the Artist • PaintTheory" },
       {
         name: "description",
         content:
-          "The story behind Maison  an artist painting the feeling of places, memories and emotions in original acrylic works.",
+          "The story behind PaintTheory | a passionate persion painting the feeling of places, memories and emotions in different art works.",
       },
       {
         property: "og:title",
-        content: "About the Artist  Maison",
+        content: "About the Artist • PaintTheory",
       },
       {
         property: "og:description",
-        content: "The story behind Maison original artworks.",
+        content: "The story behind PaintTheory artwork and studio.",
       },
     ],
   }),
@@ -75,17 +75,51 @@ function AboutPage() {
           </h2>
 
           <p className="mt-7 text-lg leading-relaxed text-muted-foreground">
-            For me, painting begins long before the first brushstroke. It starts with a thought, an image, a question, or sometimes just the feeling that something familiar could be seen in a different way.
+            For me, painting begins long before the first brushstroke. It starts with a thought, an image, a concept, or sometimes just the feeling that the concept can be created.
           </p>
 
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            I’m drawn to subjects that already carry meaning, people, places, memories, concept, everyday moments  but I don't always want to present them in the way we're used to seeing them. A divine figure doesn't always need the familiar glow, dramatic pose, or perfectly arranged composition. Sometimes, I find more beauty in imagining the moment before the spectacle: quieter, more human, almost candid.
-            That way of thinking shapes how I approach the entire painting. I care deeply about composition, proportion, balance, visual weight, and where the eye travels through a frame. I can spend an unreasonable amount of time deciding where something should sit before I even pick up a brush. Because to me, a painting doesn't become compelling simply because it is colourful or technically impressive. Every element should have a reason to be there.
-            I have no formal training in art. I’m still learning, experimenting, making mistakes, and figuring out the craft as I go. But I've always trusted my eye and my curiosity enough to pursue the images I want to see.
-            <br /><br />PaintTheory is my attempt to turn those ideas into something tangible.
-            Sometimes familiar. Sometimes unexpected. Always personal.
+            I’m drawn to subjects that already carry meaning  people, places,
+            memories, concepts, everyday moments  but I don’t always want to
+            present them the way we’re used to seeing them. A divine figure doesn’t
+            always need the familiar glow, dramatic pose, or perfectly arranged
+            composition. Sometimes, I find more beauty in imagining the moment
+            before the spectacle: quieter, more human, almost candid.
+            <br /><br />
 
-            And perhaps that's what keeps me painting the possibility of seeing something differently, and making someone else see it too.
+            That way of thinking shapes how I approach a painting. I care a lot about
+            composition, proportion, balance, visual weight, and where the eye travels
+            through a frame. I can spend an unreasonable amount of time deciding where
+            something should sit before I even pick up a brush. Because to me, a
+            painting doesn’t become compelling simply because it is colourful or
+            technically impressive. Every element should have a reason to be there.
+            <br /><br />
+
+            I have no formal training in art. I’m still learning, experimenting,
+            making mistakes, and figuring out the craft as I go. There are plenty of
+            times when I genuinely don’t know what I’m doing. I feel the lack of skill,
+            get frustrated, and then, as usual, pick myself up and start figuring it
+            out. It can be ridiculously torturous. But somewhere in that process,
+            there’s also something I really enjoy.
+            <br /><br />
+
+            I’ve always trusted my eye and my curiosity enough to chase the things I
+            want to see. And honestly, I’ve never been interested only in painting.
+            I love anything that asks something of my creativity  electronics,
+            mechanical toys, graphics, games, robotics, DIY projects, clay, science
+            experiments, sketching, crafting, and whatever else I happen to get
+            obsessed with.
+            <br /><br />
+
+            PaintTheory is partly an attempt to bring all of that back to one place.
+            More importantly, it’s a reminder to myself to keep creating. I want to
+            build a body of work that feels genuinely mine  something large,
+            strange, memorable, and hopefully worth sitting back and looking at
+            someday.
+            <br /><br />
+
+            And perhaps that’s what keeps me painting: the possibility of seeing
+            something differently, and maybe making someone else see it that way too.
           </p>
 
           <div className="mt-10 grid grid-cols-3 gap-6 border-t border-border pt-8">

@@ -1,4 +1,6 @@
 import { Link } from "@tanstack/react-router";
+import { SiInstagram, SiYoutube, SiWhatsapp } from "@icons-pack/react-simple-icons";
+import { socials } from "@/lib/socials";
 
 export function SiteFooter() {
   return (
@@ -24,16 +26,16 @@ export function SiteFooter() {
             </p>
 
             <p className="mt-6 max-w-lg text-sm leading-[1.8] text-paper/65 md:mt-8 md:text-lg">
-              Original paintings, made by hand and lived with for a while
-              before they find a new wall. Enquiries and commissions are
-              always open.
+              Original paintings. Curious ideas. Made by hand.
+              <br className="hidden md:block" />
+              Explore the work, follow the process, or get in touch about a piece of your own.
             </p>
 
-            <a
-              href="mailto:emailkamleshsahoo@gmail.com"
+            <a 
+              href={`mailto:${socials.email}`}
               className="link-underline mt-7 inline-block text-sm tracking-wide text-clay md:mt-10"
             >
-              emailkamleshsahoo@gmail.com
+              {socials.email}
             </a>
           </div>
 
@@ -76,32 +78,42 @@ export function SiteFooter() {
             </div>
 
             {/* Elsewhere */}
-            <div className="flex flex-col gap-4 md:min-w-[90px] md:gap-5">
-              <span className="label text-paper/40">
-                Elsewhere
-              </span>
+            <div className="flex flex-col gap-4 md:min-w-[70px] md:gap-5">
+              <span className="label text-paper/50">ELSEWHERE</span>
 
-              <a
-                href="#"
-                className="text-sm text-paper/70 transition-colors hover:text-paper"
-              >
-                Instagram
-              </a>
+              <div className="flex flex-col gap-5">
+                <a
+                  href={socials.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 text-sm text-paper/70 transition-colors hover:text-paper"
+                >
+                  <SiInstagram className="size-4" />
+                  <span>Instagram</span>
+                </a>
 
-              <a
-                href="#"
-                className="text-sm text-paper/70 transition-colors hover:text-paper"
-              >
-                Behance
-              </a>
+                <a
+                  href={socials.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 text-sm text-paper/70 transition-colors hover:text-paper"
+                >
+                  <SiYoutube className="size-4" />
+                  <span>YouTube</span>
+                </a>
 
-              <a
-                href="#"
-                className="text-sm text-paper/70 transition-colors hover:text-paper"
-              >
-                Artsy
-              </a>
+                <a
+                  href={socials.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 text-sm text-paper/70 transition-colors hover:text-paper"
+                >
+                  <SiWhatsapp className="size-4" />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
             </div>
+
           </div>
         </div>
 
@@ -121,8 +133,8 @@ export function SiteFooter() {
         {/* Bottom divider */}
         <div className="mt-8 border-t border-paper/15 pt-5 md:mt-10 md:pt-6">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <span className="label text-paper/35">
-              © {new Date().getFullYear()} Painttheory. All works original.
+            <span className="label text-paper/35 !normal-case">
+              © {new Date().getFullYear()} PaintTheory · From the studio of Kamlesh Sahoo.
             </span>
 
             <span className="label text-paper/35">

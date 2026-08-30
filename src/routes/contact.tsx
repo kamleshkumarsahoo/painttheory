@@ -1,27 +1,32 @@
 import { supabase } from "@/lib/supabase";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import {
+  SiInstagram,
+  SiWhatsapp,
+} from "@icons-pack/react-simple-icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Reveal } from "@/components/common/Reveal";
 import { toast } from "sonner";
+import { socials } from "@/lib/socials";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Maison" },
+      { title: "Contact — PaintTheory" },
       {
         name: "description",
         content:
-          "Get in touch about collecting an original artwork, commissions or shipping.",
+          "Get in touch about artwork, commissions, ideas or simply to say hello.",
       },
-      { property: "og:title", content: "Contact — Maison" },
+      { property: "og:title", content: "Contact — PaintTheory" },
       {
         property: "og:description",
-        content: "Get in touch with Maison Studio.",
+        content: "Get in touch with PaintTheory.",
       },
     ],
   }),
@@ -39,10 +44,7 @@ function ContactPage() {
     message: "",
   });
 
-  function updateField(
-    field: keyof typeof form,
-    value: string,
-  ) {
+  function updateField(field: keyof typeof form, value: string) {
     setForm((current) => ({
       ...current,
       [field]: value,
@@ -70,27 +72,23 @@ function ContactPage() {
     try {
       setSending(true);
 
-      const { data, error } =
-        await supabase.functions.invoke(
-          "submit-contact",
-          {
-            body: {
-              name: form.name.trim(),
-              email: form.email.trim().toLowerCase(),
-              phone: form.phone.trim() || null,
-              message: form.message.trim(),
-            },
+      const { data, error } = await supabase.functions.invoke(
+        "submit-contact",
+        {
+          body: {
+            name: form.name.trim(),
+            email: form.email.trim().toLowerCase(),
+            phone: form.phone.trim() || null,
+            message: form.message.trim(),
           },
-        );
+        },
+      );
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
       if (!data?.success) {
         throw new Error(
-          data?.error ||
-            "Unable to send your message.",
+          data?.error || "Unable to send your message.",
         );
       }
 
@@ -100,10 +98,7 @@ function ContactPage() {
         "Message sent — I'll get back to you as soon as I can.",
       );
     } catch (error) {
-      console.error(
-        "CONTACT FORM ERROR:",
-        error,
-      );
+      console.error("CONTACT FORM ERROR:", error);
 
       toast.error(
         error instanceof Error
@@ -126,46 +121,50 @@ function ContactPage() {
           </h1>
 
           <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
-            For any quesions, ideas, discussion or random life thoughts. No formalities. Just write.
+            For questions, ideas, discussions or random life thoughts.
+            No formalities. Just write.
           </p>
 
-          <div className="mt-10 space-y-5">
+          <div className="mt-9 space-y-4">
             <a
-              href="mailto:emailkamleshsahoo@gmail.com"
-              className="group flex items-center gap-4 text-foreground"
+              href={`mailto:${socials.email}`}
+              className="group flex items-center gap-3 text-sm text-foreground"
             >
-              <span className="flex size-11 items-center justify-center rounded-full bg-secondary">
-                <Mail className="size-5 text-accent" />
-              </span>
-
-              <span className="link-underline">
-                emailkamleshsahoo@gmail.com
-              </span>
+              <Mail className="size-4 text-muted-foreground" />
+              <span className="link-underline">{socials.email}</span>
             </a>
 
             <a
-              href="https://www.instagram.com/painttheory.in"
+              href={`tel:${socials.phone.replace(/\s/g, "")}`}
+              className="group flex items-center gap-3 text-sm text-foreground"
+            >
+              <Phone className="size-4 text-muted-foreground" />
+              <span className="link-underline">{socials.phone}</span>
+            </a>
+
+            <a
+              href={socials.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 text-foreground"
+              className="group flex items-center gap-3 text-sm text-foreground"
             >
-              <span className="flex size-11 items-center justify-center rounded-full bg-secondary">
-                <Instagram className="size-5 text-accent" />
-              </span>
-
-              <span className="link-underline">
-                @painttheory.in
-              </span>
+              <SiWhatsapp className="size-4 text-muted-foreground" />
+              <span className="link-underline">WhatsApp</span>
             </a>
 
-            <div className="flex items-center gap-4 text-foreground">
-              <span className="flex size-11 items-center justify-center rounded-full bg-secondary">
-                <MapPin className="size-5 text-accent" />
-              </span>
+            <a
+              href={socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 text-sm text-foreground"
+            >
+              <SiInstagram className="size-4 text-muted-foreground" />
+              <span className="link-underline">@painttheory.in</span>
+            </a>
 
-              <span>
-                Bengaluru, India
-              </span>
+            <div className="flex items-center gap-3 text-sm text-foreground">
+              <MapPin className="size-4 text-muted-foreground" />
+              <span>Bengaluru, India</span>
             </div>
           </div>
         </Reveal>
@@ -187,10 +186,7 @@ function ContactPage() {
                   disabled={sent || sending}
                   value={form.name}
                   onChange={(e) =>
-                    updateField(
-                      "name",
-                      e.target.value,
-                    )
+                    updateField("name", e.target.value)
                   }
                 />
               </div>
@@ -207,10 +203,7 @@ function ContactPage() {
                   disabled={sent || sending}
                   value={form.email}
                   onChange={(e) =>
-                    updateField(
-                      "email",
-                      e.target.value,
-                    )
+                    updateField("email", e.target.value)
                   }
                 />
               </div>
@@ -247,10 +240,7 @@ function ContactPage() {
                   disabled={sent || sending}
                   value={form.message}
                   onChange={(e) =>
-                    updateField(
-                      "message",
-                      e.target.value,
-                    )
+                    updateField("message", e.target.value)
                   }
                 />
               </div>

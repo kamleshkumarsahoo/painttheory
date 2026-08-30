@@ -132,12 +132,12 @@ export function HomeHero() {
             className="
               mt-5
               grid
-              gap-6
+              gap-2
               border-t
               border-white/25
               pt-5
               md:mt-6
-              md:grid-cols-[1.15fr_1fr]
+              md:grid-cols-[1.45fr_1fr]
               md:gap-12
               md:pt-6
             "
@@ -147,19 +147,18 @@ export function HomeHero() {
 
             <p
               className="
-                max-w-xl
+                max-w-7xl
                 text-sm
+                pb-10
                 leading-relaxed
                 text-white/90
                 md:text-base
               "
             >
-              This is where I put my paintings. Some stay here.
-              Some find new walls.
+              PaintTheory is my corner of the internet where
+              I share the paintings I make, the ideas behind, and the stories that come along.
               <br className="hidden md:block" />
-              A growing collection of original works made by
-              hand, lived with for a while, and shared with the
-              world.
+              A place to explore my work, follow along, and perhaps find something that speaks to you.
             </p>
 
 

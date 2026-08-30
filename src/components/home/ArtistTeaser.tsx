@@ -152,8 +152,8 @@ export function ArtistTeaser() {
         {/* Mobile quote */}
         <Reveal>
           <p className="text-[21px] leading-[1.08]">
-            “I overthink the idea, the composition, the smallest details.
-            Somewhere between all that thinking, a painting begins.”
+            “I paint the things I find interesting. Sometimes that means a person, sometimes a place, 
+            sometimes just an idea I can't quite let go of.”
           </p>
         </Reveal>
 
@@ -167,10 +167,10 @@ export function ArtistTeaser() {
       <Reveal className="mt-8 md:hidden">
 
         <p className="max-w-lg text-xs leading-[1.7] text-muted-foreground">
-          Kamlesh is a self-taught artist who spends as much time
-          thinking about a painting as he does making one.
-          He is drawn to unusual ideas, unexpected compositions,
-          and familiar subjects seen from a different angle.
+          I'm Kamlesh, the artist behind PaintTheory. 
+          I work mostly by instinct, curiosity, and probably more overthinking than necessary. 
+          My work moves between familiar subjects, unusual ideas, 
+          and whatever catches my attention along the way.
         </p>
 
         <Link
@@ -312,15 +312,15 @@ export function ArtistTeaser() {
         <Reveal className="pb-1">
 
           <p className="mt-4 max-w-[980px] text-xl leading-[1.08] md:mt-0 md:text-4xl">
-            “I overthink the idea, the composition, the smallest details.
-            Somewhere between all that thinking, a painting begins.”
+            “I paint the things I find interesting. Sometimes that means a person, sometimes a place, 
+            sometimes just an idea I can't quite let go of.”
           </p>
 
-          <p className="mt-5 max-w-lg text-xs leading-relaxed text-muted-foreground md:mt-6 md:text-sm">
-            Kamlesh is a self-taught artist who spends as much time
-            thinking about a painting as he does making one.
-            He is drawn to unusual ideas, unexpected compositions,
-            and familiar subjects seen from a different angle.
+          <p className="mt-5 max-w-xl text-xs leading-relaxed text-muted-foreground md:mt-6 md:text-sm">
+            I'm Kamlesh, the artist behind PaintTheory. 
+            I work mostly by instinct, curiosity, and probably more overthinking than necessary. 
+            My work moves between familiar subjects, unusual ideas, 
+            and whatever catches my attention along the way.
           </p>
 
           <Link

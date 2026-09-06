@@ -1,10 +1,11 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js";
-import { Resend } from "npm:resend";
 
 import { sendEmail } from "../_shared/email/service.ts";
 import { requestPaymentEmail } from "../email-templates/customer/request-payment.ts";
 import { commissionConversationEmail } from "../email-templates/customer/commission-conversation.ts";
+import { commissionPaymentEmail } from "../email-templates/customer/commission-payment.ts";
+
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -17,10 +18,6 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
-const resend = new Resend(
-  Deno.env.get("RESEND_API_KEY")!,
-);
-
 function getPublicMediaUrl(path: string) {
   return supabase.storage
     .from("artworks")
@@ -28,21 +25,6 @@ function getPublicMediaUrl(path: string) {
     .data.publicUrl;
 }
 
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function textToHtml(value: string) {
-  return escapeHtml(value)
-    .split("\n")
-    .map((line) => line || "&nbsp;")
-    .join("<br />");
-}
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -202,247 +184,24 @@ serve(async (req) => {
           );
         }
 
-        subject =
-          `Payment ${payment.payment_number} - Your Commission | Painttheory by Kamlesh Sahoo`;
-
         const amount = `₹${Number(
           payment.amount,
         ).toLocaleString("en-IN")}`;
 
-        html = `
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <meta charset="UTF-8" />
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1.0"
-            />
-            <title>${escapeHtml(subject)}</title>
-          </head>
+        const emailContent = commissionPaymentEmail({
+          customerName: inquiry.customer_name,
+          paymentNumber: payment.payment_number,
+          amount,
+          customerLink: payment.customer_link,
+          isFinal: payment.is_final,
+        });
 
-          <body
-            style="
-              margin:0;
-              padding:32px 12px;
-              background:#f3efe7;
-              color:#2b2823;
-            "
-          >
-            <table
-              role="presentation"
-              width="100%"
-              cellpadding="0"
-              cellspacing="0"
-            >
-              <tr>
-                <td align="center">
-
-                  <table
-                    role="presentation"
-                    width="600"
-                    cellpadding="0"
-                    cellspacing="0"
-                    style="
-                      width:100%;
-                      max-width:600px;
-                      background:#fbf8f2;
-                      border:1px solid #e7dfd2;
-                      border-radius:18px;
-                      overflow:hidden;
-                    "
-                  >
-
-                    <tr>
-                      <td
-                        style="
-                          padding:42px 44px 12px;
-                          text-align:center;
-                        "
-                      >
-                        <div
-                          style="
-                            font-family:Georgia,'Times New Roman',serif;
-                            font-size:24px;
-                            letter-spacing:6px;
-                            text-transform:uppercase;
-                            color:#1c1a17;
-                          "
-                        >
-                          Kamlesh Sahoo
-                        </div>
-
-                        <div
-                          style="
-                            margin-top:8px;
-                            font-family:Georgia,serif;
-                            font-size:11px;
-                            letter-spacing:3px;
-                            text-transform:uppercase;
-                            color:#9b8668;
-                          "
-                        >
-                          Original Contemporary Art
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td style="padding:0 44px;">
-                        <div
-                          style="
-                            height:1px;
-                            background:#e7dfd2;
-                            margin:22px 0;
-                          "
-                        ></div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td
-                        style="
-                          padding:0 44px 42px;
-                          font-family:Georgia,serif;
-                          color:#2b2823;
-                          font-size:15px;
-                          line-height:1.8;
-                        "
-                      >
-                        <p>
-                          Hi ${escapeHtml(
-                            inquiry.customer_name,
-                          )},
-                        </p>
-
-                        <p>
-                          Thank you for continuing with your
-                          commissioned artwork.
-                        </p>
-
-                        <p>
-                          Your payment request is ready.
-                        </p>
-
-                        <div
-                          style="
-                            margin:28px 0;
-                            padding:22px;
-                            border:1px solid #e7dfd2;
-                            border-radius:14px;
-                            background:#f8f4ec;
-                          "
-                        >
-                          <div
-                            style="
-                              font-size:11px;
-                              letter-spacing:2px;
-                              text-transform:uppercase;
-                              color:#9b8668;
-                            "
-                          >
-                            Payment ${payment.payment_number}
-                          </div>
-
-                          <div
-                            style="
-                              margin-top:8px;
-                              font-family:Georgia,serif;
-                              font-size:30px;
-                              color:#1c1a17;
-                            "
-                          >
-                            ${amount}
-                          </div>
-                        </div>
-
-                        <p style="text-align:center;">
-                          <a
-                            href="${escapeHtml(
-                              payment.customer_link,
-                            )}"
-                            style="
-                              display:inline-block;
-                              padding:14px 28px;
-                              border-radius:999px;
-                              background:#1c1a17;
-                              color:#ffffff;
-                              text-decoration:none;
-                              font-family:Arial,sans-serif;
-                              font-size:14px;
-                            "
-                          >
-                            Complete Payment
-                          </a>
-                        </p>
-
-                        ${
-                          payment.is_final
-                            ? `
-                              <p style="margin-top:28px;">
-                                This is the final payment for your
-                                commission. After completing it,
-                                you'll be asked to provide your
-                                shipping address.
-                              </p>
-                            `
-                            : ""
-                        }
-
-                        <p style="margin-top:28px;">
-                          If you have any questions regarding this
-                          payment, please feel free to get in touch.
-                        </p>
-
-                        <p>
-                          Regards,<br />
-                          Kamlesh Sahoo
-                        </p>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td style="padding:0 44px;">
-                        <div
-                          style="
-                            height:1px;
-                            background:#e7dfd2;
-                          "
-                        ></div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td
-                        style="
-                          padding:24px 44px 40px;
-                          text-align:center;
-                          font-family:Georgia,'Times New Roman',serif;
-                        "
-                      >
-                        <div
-                          style="
-                            font-size:11px;
-                            letter-spacing:2px;
-                            text-transform:uppercase;
-                            color:#b3a892;
-                          "
-                        >
-                          PaintTheory | Kamlesh Sahoo
-                        </div>
-                      </td>
-                    </tr>
-
-                  </table>
-
-                </td>
-              </tr>
-            </table>
-          </body>
-          </html>
-        `;
+        subject = emailContent.subject;
+        html = emailContent.html;
+        text = emailContent.text;
 
         break;
+
       }
 
       /*
@@ -508,10 +267,12 @@ serve(async (req) => {
         /*
         * SEND
         */
+
         let messageId: string | undefined;
 
         if (
           template === "request-payment" ||
+          template === "commission-payment" ||
           template === "commission-conversation"
         ) {
           const emailResponse = await sendEmail({
@@ -520,7 +281,7 @@ serve(async (req) => {
             html,
             text,
           });
-
+          
           if (!emailResponse.success) {
             throw new Error(
               emailResponse.error ||
@@ -533,27 +294,6 @@ serve(async (req) => {
           console.log(
             `Email sent successfully to ${inquiry.customer_email}`,
             messageId,
-          );
-        } else {
-          const {
-            data,
-            error: resendError,
-          } = await resend.emails.send({
-            from: Deno.env.get("FROM_EMAIL")!,
-            to: [inquiry.customer_email],
-            subject,
-            html,
-          });
-
-          if (resendError) {
-            throw resendError;
-          }
-
-          messageId = data?.id;
-
-          console.log(
-            `Email sent successfully to ${inquiry.customer_email}`,
-            data,
           );
         }
 

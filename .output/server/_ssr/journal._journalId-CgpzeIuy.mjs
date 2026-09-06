@@ -1,5 +1,5 @@
+import { i as require_jsx_runtime } from "../_libs/@icons-pack/react-simple-icons+[...].mjs";
 import { g as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { i as require_jsx_runtime } from "../_libs/@radix-ui/react-label+[...].mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/journal._journalId-CgpzeIuy.js
 var import_jsx_runtime = require_jsx_runtime();
 function JournalNotFound() {

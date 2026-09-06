@@ -1,5 +1,5 @@
+import { i as require_jsx_runtime } from "../_libs/@icons-pack/react-simple-icons+[...].mjs";
 import { f as Outlet } from "../_libs/@tanstack/react-router+[...].mjs";
-import { i as require_jsx_runtime } from "../_libs/@radix-ui/react-label+[...].mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/gallery-CJgghy47.js
 var import_jsx_runtime = require_jsx_runtime();
 var SplitComponent = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {});

@@ -1,6 +1,5 @@
 import { a as __toESM, i as __toCommonJS, n as __esmMin, r as __exportAll } from "../_runtime.mjs";
-import { n as require_react } from "./@radix-ui/react-compose-refs+[...].mjs";
-import { i as require_jsx_runtime } from "./@radix-ui/react-label+[...].mjs";
+import { a as require_react, i as require_jsx_runtime } from "./@icons-pack/react-simple-icons+[...].mjs";
 
 //#region node_modules/unenv/dist/runtime/_internal/utils.mjs
 /* @__NO_SIDE_EFFECTS__ */
@@ -9847,4 +9846,4 @@ var motion = /*@__PURE__*/ createMotionProxy({
 	...layout
 }, createDomVisualElement);
 //#endregion
-export { AnimatePresence as n, performance_default as r, motion as t };
+export { AnimatePresence as n, motion as t };

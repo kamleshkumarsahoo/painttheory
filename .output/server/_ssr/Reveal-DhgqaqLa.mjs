@@ -1,4 +1,4 @@
-import { i as require_jsx_runtime } from "../_libs/@radix-ui/react-label+[...].mjs";
+import { i as require_jsx_runtime } from "../_libs/@icons-pack/react-simple-icons+[...].mjs";
 import { t as motion } from "../_libs/motion.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/Reveal-DhgqaqLa.js
 var import_jsx_runtime = require_jsx_runtime();

@@ -1,8 +1,7 @@
 import { a as __toESM } from "../_runtime.mjs";
 import { t as supabase } from "./supabase-BYgwpyL6.mjs";
-import { n as require_react } from "../_libs/@radix-ui/react-compose-refs+[...].mjs";
-import { i as require_jsx_runtime } from "../_libs/@radix-ui/react-label+[...].mjs";
-import { S as LoaderCircle, m as Phone, y as Mail } from "../_libs/lucide-react.mjs";
+import { a as require_react, i as require_jsx_runtime } from "../_libs/@icons-pack/react-simple-icons+[...].mjs";
+import { C as LoaderCircle, b as Mail, h as Phone } from "../_libs/lucide-react.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/contact-messages-BsBWQOlC.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();

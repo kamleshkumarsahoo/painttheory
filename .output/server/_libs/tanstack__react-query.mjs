@@ -1,6 +1,5 @@
 import { a as __toESM } from "../_runtime.mjs";
-import { n as require_react } from "./@radix-ui/react-compose-refs+[...].mjs";
-import { i as require_jsx_runtime } from "./@radix-ui/react-label+[...].mjs";
+import { a as require_react, i as require_jsx_runtime } from "./@icons-pack/react-simple-icons+[...].mjs";
 //#region node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var import_jsx_runtime = require_jsx_runtime();

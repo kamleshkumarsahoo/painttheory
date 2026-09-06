@@ -67,7 +67,7 @@ function AdminLayout() {
     <div className="min-h-screen bg-background">
       <AdminHeader />
 
-      <main>
+      <main className="pt-[88px]">
         <Outlet />
       </main>
     </div>

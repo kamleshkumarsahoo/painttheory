@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js";
+import { sendEmail } from "../_shared/email/service.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -12,8 +13,6 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
-const resendApiKey = Deno.env.get("RESEND_API_KEY")!;
-const fromEmail = Deno.env.get("FROM_EMAIL")!;
 const notificationEmail =
   Deno.env.get("CONTACT_NOTIFICATION_EMAIL")!;
 
@@ -89,158 +88,156 @@ serve(async (req) => {
     }
 
     /*
-     * Send notification email.
+     * Send notification email through the centralized
+     * PaintTheory email service.
      *
      * The customer's email is used as Reply-To,
      * not as the sender.
      */
-    const emailResponse = await fetch(
-      "https://api.resend.com/emails",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: fromEmail,
-          to: [notificationEmail],
-          reply_to: email,
-          subject: `New contact message from ${name}`,
-          html: `
-            <!DOCTYPE html>
-            <html>
-              <body
+    const emailResponse = await sendEmail({
+      to: notificationEmail,
+      replyTo: email,
+      subject: `[Contact] ${name} — ${contactMessage.id}`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <body
+            style="
+              margin: 0;
+              padding: 32px 16px;
+              background: #f3efe7;
+              color: #2b2823;
+              font-family: Arial, sans-serif;
+            "
+          >
+            <div
+              style="
+                max-width: 600px;
+                margin: 0 auto;
+                background: #fbf8f2;
+                border: 1px solid #e7dfd2;
+                border-radius: 16px;
+                padding: 32px;
+              "
+            >
+              <div
                 style="
-                  margin: 0;
-                  padding: 32px 16px;
-                  background: #f3efe7;
-                  color: #2b2823;
-                  font-family: Arial, sans-serif;
+                  text-align: center;
+                  margin-bottom: 28px;
                 "
               >
                 <div
                   style="
-                    max-width: 600px;
-                    margin: 0 auto;
-                    background: #fbf8f2;
-                    border: 1px solid #e7dfd2;
-                    border-radius: 16px;
-                    padding: 32px;
+                    font-family: Georgia, serif;
+                    font-size: 22px;
+                    letter-spacing: 4px;
+                    text-transform: uppercase;
                   "
                 >
-                  <div
-                    style="
-                      text-align: center;
-                      margin-bottom: 28px;
-                    "
-                  >
-                    <div
-                      style="
-                        font-family: Georgia, serif;
-                        font-size: 22px;
-                        letter-spacing: 4px;
-                        text-transform: uppercase;
-                      "
-                    >
-                      Kamlesh Sahoo
-                    </div>
-
-                    <div
-                      style="
-                        margin-top: 8px;
-                        font-size: 10px;
-                        letter-spacing: 2px;
-                        text-transform: uppercase;
-                        color: #9b8668;
-                      "
-                    >
-                      New Contact Message
-                    </div>
-                  </div>
-
-                  <div
-                    style="
-                      border-top: 1px solid #e7dfd2;
-                      padding-top: 24px;
-                    "
-                  >
-                    <p>
-                      <strong>Name</strong><br />
-                      ${escapeHtml(name)}
-                    </p>
-
-                    <p>
-                      <strong>Email</strong><br />
-                      ${escapeHtml(email)}
-                    </p>
-
-                    ${
-                      phone
-                        ? `
-                          <p>
-                            <strong>Phone</strong><br />
-                            ${escapeHtml(phone)}
-                          </p>
-                        `
-                        : ""
-                    }
-
-                    <div
-                      style="
-                        margin-top: 24px;
-                        padding: 20px;
-                        background: #f8f4ec;
-                        border: 1px solid #e7dfd2;
-                        border-radius: 12px;
-                      "
-                    >
-                      <p
-                        style="
-                          margin-top: 0;
-                          font-weight: 600;
-                        "
-                      >
-                        Message
-                      </p>
-
-                      <p
-                        style="
-                          margin-bottom: 0;
-                          white-space: pre-wrap;
-                          line-height: 1.7;
-                        "
-                      >
-                        ${escapeHtml(message)}
-                      </p>
-                    </div>
-
-                    <p
-                      style="
-                        margin-top: 28px;
-                        font-size: 12px;
-                        color: #777;
-                      "
-                    >
-                      Message ID:
-                      ${escapeHtml(contactMessage.id)}
-                    </p>
-                  </div>
+                  PaintTheory
                 </div>
-              </body>
-            </html>
-          `,
-        }),
-      },
-    );
 
-    if (!emailResponse.ok) {
-      const errorBody =
-        await emailResponse.text();
+                <div
+                  style="
+                    margin-top: 8px;
+                    font-size: 10px;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    color: #9b8668;
+                  "
+                >
+                  New Contact Message
+                </div>
+              </div>
 
+              <div
+                style="
+                  border-top: 1px solid #e7dfd2;
+                  padding-top: 24px;
+                "
+              >
+                <p>
+                  <strong>Name</strong><br />
+                  ${escapeHtml(name)}
+                </p>
+
+                <p>
+                  <strong>Email</strong><br />
+                  ${escapeHtml(email)}
+                </p>
+
+                ${
+                  phone
+                    ? `
+                      <p>
+                        <strong>Phone</strong><br />
+                        ${escapeHtml(phone)}
+                      </p>
+                    `
+                    : ""
+                }
+
+                <div
+                  style="
+                    margin-top: 24px;
+                    padding: 20px;
+                    background: #f8f4ec;
+                    border: 1px solid #e7dfd2;
+                    border-radius: 12px;
+                  "
+                >
+                  <p
+                    style="
+                      margin-top: 0;
+                      font-weight: 600;
+                    "
+                  >
+                    Message
+                  </p>
+
+                  <p
+                    style="
+                      margin-bottom: 0;
+                      white-space: pre-wrap;
+                      line-height: 1.7;
+                    "
+                  >
+                    ${escapeHtml(message)}
+                  </p>
+                </div>
+
+                <p
+                  style="
+                    margin-top: 28px;
+                    font-size: 12px;
+                    color: #777;
+                  "
+                >
+                  Contact ID:
+                  ${escapeHtml(contactMessage.id)}
+                </p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+      text: `
+New Contact Message
+
+Name: ${name}
+Email: ${email}
+${phone ? `Phone: ${phone}\n` : ""}
+Message:
+${message}
+
+Contact ID: ${contactMessage.id}
+      `.trim(),
+    });
+
+    if (!emailResponse.success) {
       console.error(
-        "RESEND CONTACT EMAIL ERROR:",
-        errorBody,
+        "CONTACT EMAIL ERROR:",
+        emailResponse.error,
       );
 
       /*

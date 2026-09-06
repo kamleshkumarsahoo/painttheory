@@ -1,0 +1,244 @@
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+export function purchaseRequestReceivedEmail({
+  customerName,
+  artworkTitle,
+  artworkPrice,
+  referenceNumber,
+}: {
+  customerName: string;
+  artworkTitle: string;
+  artworkPrice: string;
+  referenceNumber: string;
+}) {
+  const subject = "We received your artwork request | PaintTheory";
+
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+      />
+      <title>${escapeHtml(subject)}</title>
+    </head>
+
+    <body
+      style="
+        margin:0;
+        padding:32px 12px;
+        background:#f3efe7;
+        color:#2b2823;
+      "
+    >
+      <table
+        role="presentation"
+        width="100%"
+        cellpadding="0"
+        cellspacing="0"
+      >
+        <tr>
+          <td align="center">
+
+            <table
+              role="presentation"
+              width="600"
+              cellpadding="0"
+              cellspacing="0"
+              style="
+                width:100%;
+                max-width:600px;
+                background:#fbf8f2;
+                border:1px solid #e7dfd2;
+                border-radius:18px;
+                overflow:hidden;
+              "
+            >
+
+              <tr>
+                <td
+                  style="
+                    padding:42px 44px 12px;
+                    text-align:center;
+                  "
+                >
+                  <div
+                    style="
+                      font-family:Georgia,'Times New Roman',serif;
+                      font-size:24px;
+                      letter-spacing:6px;
+                      text-transform:uppercase;
+                      color:#1c1a17;
+                    "
+                  >
+                    PaintTheory
+                  </div>
+
+                  <div
+                    style="
+                      margin-top:8px;
+                      font-family:Georgia,serif;
+                      font-size:11px;
+                      letter-spacing:3px;
+                      text-transform:uppercase;
+                      color:#9b8668;
+                    "
+                  >
+                    Original Contemporary Art
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:0 44px;">
+                  <div
+                    style="
+                      height:1px;
+                      background:#e7dfd2;
+                      margin:22px 0;
+                    "
+                  ></div>
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  style="
+                    padding:0 44px 42px;
+                    font-family:Georgia,'Times New Roman',serif;
+                    color:#2b2823;
+                    font-size:15px;
+                    line-height:1.8;
+                  "
+                >
+
+                  <p style="margin-top:0;">
+                    Hi ${escapeHtml(customerName)},
+                  </p>
+
+                  <p>
+                    Thank you for your interest in
+                    <strong>${escapeHtml(artworkTitle)}</strong>.
+                    We've received your request and will review it shortly.
+                  </p>
+
+                  <div
+                    style="
+                      margin:28px 0;
+                      padding:20px;
+                      background:#f3efe7;
+                      border:1px solid #e7dfd2;
+                      border-radius:12px;
+                    "
+                  >
+                    <p style="margin:0 0 8px;">
+                      <strong>Artwork</strong><br />
+                      ${escapeHtml(artworkTitle)}
+                    </p>
+
+                    <p style="margin:0 0 8px;">
+                      <strong>Price</strong><br />
+                      ${escapeHtml(artworkPrice)}
+                    </p>
+
+                    <p style="margin:0;">
+                      <strong>Reference</strong><br />
+                      ${escapeHtml(referenceNumber)}
+                    </p>
+                  </div>
+
+                  <p>
+                    I'll get back to you with the next steps shortly.
+                    Please keep this reference number for your records.
+                  </p>
+
+                  <p>
+                    If you have any questions in the meantime, simply
+                    reply to this email.
+                  </p>
+
+                  <p style="margin-top:28px;">
+                    Regards,<br />
+                    Kamlesh Sahoo<br />
+                    PaintTheory
+                  </p>
+
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:0 44px;">
+                  <div
+                    style="
+                      height:1px;
+                      background:#e7dfd2;
+                    "
+                  ></div>
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  style="
+                    padding:24px 44px 40px;
+                    text-align:center;
+                    font-family:Georgia,'Times New Roman',serif;
+                  "
+                >
+                  <div
+                    style="
+                      font-size:11px;
+                      letter-spacing:2px;
+                      text-transform:uppercase;
+                      color:#b3a892;
+                    "
+                  >
+                    PaintTheory | Kamlesh Sahoo
+                  </div>
+                </td>
+              </tr>
+
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+
+  const text = `
+Hi ${customerName},
+
+Thank you for your interest in ${artworkTitle}.
+
+We've received your artwork request and will review it shortly.
+
+Artwork: ${artworkTitle}
+Price: ${artworkPrice}
+Reference: ${referenceNumber}
+
+I'll get back to you with the next steps shortly.
+
+If you have any questions in the meantime, simply reply to this email.
+
+Regards,
+Kamlesh Sahoo
+PaintTheory
+  `.trim();
+
+  return {
+    subject,
+    html,
+    text,
+  };
+}

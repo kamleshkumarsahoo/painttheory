@@ -1,7 +1,5 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js";
-import { sendEmail } from "../_shared/email/service.ts";
-import { renderContactMessage } from "../email-templates/internal/contact-message.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -13,9 +11,6 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
-
-const notificationEmail =
-  Deno.env.get("CONTACT_NOTIFICATION_EMAIL")!;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -64,10 +59,11 @@ serve(async (req) => {
     }
 
     /*
-     * Save the contact message first.
+     * Save the contact message.
      *
-     * The database remains the source of truth even if
-     * notification email delivery fails.
+     * The database is the source of truth.
+     * Admin notification is handled separately
+     * by the contact_messages INSERT webhook.
      */
     const {
       data: contactMessage,
@@ -88,63 +84,10 @@ serve(async (req) => {
       throw error;
     }
 
-    /*
-     * Build the email from the centralized template.
-     *
-     * The customer's email is used as Reply-To,
-     * not as the sender.
-     */
-    const emailContent = renderContactMessage({
-      name,
-      email,
-      phone,
-      message,
-      contactId: contactMessage.id,
-    });
-
-    /*
-     * Send through the centralized PaintTheory
-     * email service.
-     */
-    const emailResponse = await sendEmail({
-      to: notificationEmail,
-      replyTo: email,
-      subject: emailContent.subject,
-      html: emailContent.html,
-      text: emailContent.text,
-    });
-
-    if (!emailResponse.success) {
-      console.error(
-        "CONTACT EMAIL ERROR:",
-        emailResponse.error,
-      );
-
-      /*
-       * The contact message is already safely stored.
-       * Don't pretend the entire submission failed.
-       */
-      return new Response(
-        JSON.stringify({
-          success: true,
-          messageId: contactMessage.id,
-          notificationSent: false,
-        }),
-        {
-          status: 200,
-          headers: {
-            ...corsHeaders,
-            "Content-Type": "application/json",
-          },
-        },
-      );
-    }
-
     return new Response(
       JSON.stringify({
         success: true,
         messageId: contactMessage.id,
-        notificationSent: true,
       }),
       {
         status: 200,

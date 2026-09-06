@@ -99,7 +99,7 @@ export async function createInquiry(inquiry: {
     artworkPriceSnapshot = artwork.price;
   }
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("inquiries")
     .insert({
       inquiry_type:
@@ -135,9 +135,13 @@ export async function createInquiry(inquiry: {
         inquiry.note?.trim() || null,
 
       inquiry_status: "NEW",
-    });
+    })
+    .select()
+    .single();
 
   if (error) throw error;
+
+  return data;
 }
 
 export async function getAllInquiries() {

@@ -1,0 +1,162 @@
+export interface ContactMessageTemplateData {
+  name: string;
+  email: string;
+  phone?: string | null;
+  message: string;
+  contactId: string;
+}
+
+export function renderContactMessage(
+  data: ContactMessageTemplateData,
+) {
+  const { name, email, phone, message, contactId } = data;
+
+  return {
+    subject: `[Contact] ${name} — ${contactId}`,
+
+    html: `
+      <!DOCTYPE html>
+      <html>
+        <body
+          style="
+            margin: 0;
+            padding: 32px 16px;
+            background: #f3efe7;
+            color: #2b2823;
+            font-family: Arial, sans-serif;
+          "
+        >
+          <div
+            style="
+              max-width: 600px;
+              margin: 0 auto;
+              background: #fbf8f2;
+              border: 1px solid #e7dfd2;
+              border-radius: 16px;
+              padding: 32px;
+            "
+          >
+            <div
+              style="
+                text-align: center;
+                margin-bottom: 28px;
+              "
+            >
+              <div
+                style="
+                  font-family: Georgia, serif;
+                  font-size: 22px;
+                  letter-spacing: 4px;
+                  text-transform: uppercase;
+                "
+              >
+                PaintTheory
+              </div>
+
+              <div
+                style="
+                  margin-top: 8px;
+                  font-size: 10px;
+                  letter-spacing: 2px;
+                  text-transform: uppercase;
+                  color: #9b8668;
+                "
+              >
+                New Contact Message
+              </div>
+            </div>
+
+            <div
+              style="
+                border-top: 1px solid #e7dfd2;
+                padding-top: 24px;
+              "
+            >
+              <p>
+                <strong>Name</strong><br />
+                ${escapeHtml(name)}
+              </p>
+
+              <p>
+                <strong>Email</strong><br />
+                ${escapeHtml(email)}
+              </p>
+
+              ${
+                phone
+                  ? `
+                    <p>
+                      <strong>Phone</strong><br />
+                      ${escapeHtml(phone)}
+                    </p>
+                  `
+                  : ""
+              }
+
+              <div
+                style="
+                  margin-top: 24px;
+                  padding: 20px;
+                  background: #f8f4ec;
+                  border: 1px solid #e7dfd2;
+                  border-radius: 12px;
+                "
+              >
+                <p
+                  style="
+                    margin-top: 0;
+                    font-weight: 600;
+                  "
+                >
+                  Message
+                </p>
+
+                <p
+                  style="
+                    margin-bottom: 0;
+                    white-space: pre-wrap;
+                    line-height: 1.7;
+                  "
+                >
+                  ${escapeHtml(message)}
+                </p>
+              </div>
+
+              <p
+                style="
+                  margin-top: 28px;
+                  font-size: 12px;
+                  color: #777;
+                "
+              >
+                Contact ID:
+                ${escapeHtml(contactId)}
+              </p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `,
+
+    text: `
+New Contact Message
+
+Name: ${name}
+Email: ${email}
+${phone ? `Phone: ${phone}\n` : ""}
+Message:
+${message}
+
+Contact ID: ${contactId}
+    `.trim(),
+  };
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}

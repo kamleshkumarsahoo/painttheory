@@ -2,7 +2,8 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js";
 import { Resend } from "npm:resend";
 
-import { requestPaymentEmail } from "../_shared/email-templates/request-payment.ts";
+import { sendEmail } from "../_shared/email/service.ts";
+import { requestPaymentEmail } from "../email-templates/customer/request-payment.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -104,6 +105,7 @@ serve(async (req) => {
       : "";
 
     let html = "";
+    let text = "";
     let subject = "";
 
     switch (template) {
@@ -112,6 +114,7 @@ serve(async (req) => {
        * GALLERY PURCHASE
        * =====================================================
        */
+
       case "request-payment": {
         if (!inquiry.artworks) {
           throw new Error(
@@ -119,10 +122,7 @@ serve(async (req) => {
           );
         }
 
-        subject =
-          "🎨 Your Artwork Has Been Reserved | PaintTheory by Kamlesh Sahoo";
-
-        html = requestPaymentEmail({
+        const emailContent = requestPaymentEmail({
           customerName:
             inquiry.customer_name,
 
@@ -143,10 +143,14 @@ serve(async (req) => {
 
           collectorPortal:
             inquiry.customer_link ?? "",
-          
-          referenceNumber: 
+
+          referenceNumber:
             inquiry.order_number ?? inquiry.id.slice(0, 8),
         });
+
+        subject = emailContent.subject;
+        html = emailContent.html;
+        text = emailContent.text;
 
         break;
       }
@@ -634,89 +638,113 @@ serve(async (req) => {
         );
     }
 
-    /*
-     * PREVIEW
-     *
-     * Generate the exact HTML but don't send anything.
-     */
-    if (action === "preview") {
-      return new Response(
-        JSON.stringify({
-          success: true,
-          subject,
-          html,
-        }),
-        {
-          status: 200,
-          headers: {
-            ...corsHeaders,
-            "Content-Type":
-              "application/json",
+        /*
+        * PREVIEW
+        *
+        * Generate the exact HTML but don't send anything.
+        */
+        if (action === "preview") {
+          return new Response(
+            JSON.stringify({
+              success: true,
+              subject,
+              html,
+            }),
+            {
+              status: 200,
+              headers: {
+                ...corsHeaders,
+                "Content-Type": "application/json",
+              },
+            },
+          );
+        }
+
+        /*
+        * SEND
+        */
+
+        let messageId: string | undefined;
+
+        if (template === "request-payment") {
+          const emailResponse = await sendEmail({
+            to: inquiry.customer_email,
+            subject,
+            html,
+            text,
+          });
+
+          if (!emailResponse.success) {
+            throw new Error(
+              emailResponse.error ||
+                "Failed to send request payment email",
+            );
+          }
+
+          messageId = emailResponse.messageId;
+
+          console.log(
+            `Request payment email sent successfully to ${inquiry.customer_email}`,
+            messageId,
+          );
+        } else {
+          const {
+            data,
+            error: resendError,
+          } = await resend.emails.send({
+            from: Deno.env.get("FROM_EMAIL")!,
+            to: [inquiry.customer_email],
+            subject,
+            html,
+          });
+
+          if (resendError) {
+            throw resendError;
+          }
+
+          messageId = data?.id;
+
+          console.log(
+            `Email sent successfully to ${inquiry.customer_email}`,
+            data,
+          );
+        }
+
+        return new Response(
+          JSON.stringify({
+            success: true,
+            message: "Email sent successfully",
+            messageId,
+          }),
+          {
+            status: 200,
+            headers: {
+              ...corsHeaders,
+              "Content-Type": "application/json",
+            },
           },
-        },
-      );
-    }
+        );
+      } catch (err) {
+        console.error(
+          "SEND EMAIL ERROR:",
+          err,
+        );
 
-    /*
-     * SEND
-     */
-    const {
-      data,
-      error: resendError,
-    } = await resend.emails.send({
-      from: Deno.env.get("FROM_EMAIL")!,
-      to: [inquiry.customer_email],
-      subject,
-      html,
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error:
+              err instanceof Error
+                ? err.message
+                : "Unknown error occurred",
+          }),
+          {
+            status: 500,
+            headers: {
+              ...corsHeaders,
+              "Content-Type": "application/json",
+            },
+          },
+        );
+      }
     });
-
-    if (resendError) {
-      throw resendError;
-    }
-
-    console.log(
-      `Email sent successfully to ${inquiry.customer_email}`,
-      data,
-    );
-
-    return new Response(
-      JSON.stringify({
-        success: true,
-        message:
-          "Email sent successfully",
-        data,
-      }),
-      {
-        status: 200,
-        headers: {
-          ...corsHeaders,
-          "Content-Type":
-            "application/json",
-        },
-      },
-    );
-  } catch (err) {
-    console.error(
-      "SEND EMAIL ERROR:",
-      err,
-    );
-
-    return new Response(
-      JSON.stringify({
-        success: false,
-        error:
-          err instanceof Error
-            ? err.message
-            : "Unknown error occurred",
-      }),
-      {
-        status: 500,
-        headers: {
-          ...corsHeaders,
-          "Content-Type":
-            "application/json",
-        },
-      },
-    );
-  }
-});

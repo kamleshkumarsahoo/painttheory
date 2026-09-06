@@ -19,7 +19,10 @@ export function requestPaymentEmail({
   artworkDimensions,
   referenceNumber,
 }: OrderApprovedEmailProps) {
-  return `
+  const subject =
+    "🎨 Your Artwork Has Been Reserved | PaintTheory by Kamlesh Sahoo";
+
+  const html = `
 
   <!DOCTYPE html>
   <html lang="en">
@@ -535,6 +538,39 @@ This email was prepared exclusively for ${customerName}.
 </body>
 
 </html>
-
 `;
+
+  const text = `
+Hello ${customerName},
+
+Thank you for your interest in ${artworkTitle}.
+
+I'm delighted to let you know that your request has been approved, and this artwork has now been reserved exclusively in your name.
+
+Artwork: ${artworkTitle}
+Medium: ${artworkMedium}
+Dimensions: ${artworkDimensions}
+Reserved Price: ${artworkPrice}
+Request Reference: ${referenceNumber}
+
+Complete your purchase:
+${collectorPortal}
+
+Please provide delivery details after payment.
+
+If you have any questions, simply reply to this email and I'll be happy to help.
+
+Looking forward to sending this artwork to its new home.
+
+Warm regards,
+Kamlesh
+Artist
+Painttheory
+`;
+
+  return {
+    subject,
+    html,
+    text,
+  };
 }

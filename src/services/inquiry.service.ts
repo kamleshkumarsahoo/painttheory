@@ -99,9 +99,14 @@ export async function createInquiry(inquiry: {
     artworkPriceSnapshot = artwork.price;
   }
 
-  const { data, error } = await supabase
+  const id = uuidv4();
+  const orderNumber = createOrderNumber();
+
+  const { error } = await supabase
     .from("inquiries")
     .insert({
+      id,
+
       inquiry_type:
         inquiry.inquiry_type ?? "ART_PURCHASE",
 
@@ -111,7 +116,7 @@ export async function createInquiry(inquiry: {
       artwork_price_snapshot:
         artworkPriceSnapshot ?? null,
 
-      order_number: createOrderNumber(),
+      order_number: orderNumber,
 
       customer_name:
         inquiry.customer_name.trim(),
@@ -135,13 +140,14 @@ export async function createInquiry(inquiry: {
         inquiry.note?.trim() || null,
 
       inquiry_status: "NEW",
-    })
-    .select()
-    .single();
+    });
 
   if (error) throw error;
 
-  return data;
+  return {
+    id,
+    order_number: orderNumber,
+  };
 }
 
 export async function getAllInquiries() {
